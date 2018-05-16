@@ -6,7 +6,7 @@ ENV PACKAGES="openssl-devel gcc git"
 
 RUN yum install -y unzip ${PACKAGES} \
 ## Install additional plugins
-    && luarocks install lua-resty-openidc \
+#    && luarocks install lua-resty-openidc \
     && luarocks install kong-oidc \
 ## Cleanup
     && yum remove -y ${PACKAGES} \
