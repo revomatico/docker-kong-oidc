@@ -26,5 +26,3 @@ RUN yum install -y unzip ${PACKAGES} \
     && yum remove -y ${PACKAGES} \
     && yum clean all \
     && rm -rf /var/cache/yum
-
-COPY usr /usr
