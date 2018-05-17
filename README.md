@@ -10,7 +10,20 @@
 - OpenID Connect plugin: [kong-oidc](https://github.com/nokia/kong-oidc)
     - Based on: [lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc)
 
-# Build
-- Run `./build.sh` to generate `nginx_kong.lua` template, to include `set_decode_base64 $session_secret 'XX';`
-    - This is needed for the kong-oidc plugin to set a session secret.
-- See: https://github.com/nokia/kong-oidc/issues/1
+# Memcached
+- Reference: https://github.com/bungle/lua-resty-session#pluggable-storage-adapters
+- To override the default sesion storage: **cookie** with memcached, set
+    - `KONG_X_SESSION_STORAGE=memcache`
+- Memcached hostname is by default **mcd-memcached** (in my case installed via helm in a Kubernetes cluster)
+    - Set `KONG_X_SESSION_MEMCACHE_HOST=mynewhost`
+    - Alternatively, set up DNS entry for **mcd-memcached** to be resolved from within the container
+- Memcached port is by default **11211**, override by setting:
+    - `KONG_X_SESSION_MEMCACHE_PORT=12345`
+
+# Notes
+- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'somerandomstring';`
+    - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
+    - See: https://github.com/nokia/kong-oidc/issues/1
+- To enable the plugins, set tne env variable for the container with comma separated plugin values:
+    - `KONG_CUSTOM_PLUGINS=oidc`
+- **kong-http-to-https-redirect** plugin is actually not working (yet), kong complains is not actually installed
