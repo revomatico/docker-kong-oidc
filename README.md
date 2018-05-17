@@ -4,5 +4,5 @@
 - Kong: v0.12
 - OpenID Connect plugin: [kong-oidc](https://github.com/nokia/kong-oidc)
     - Based on: [lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc)
-
+- [kong-http-to-https-redirect plugin](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
 
