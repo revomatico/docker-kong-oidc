@@ -16,6 +16,8 @@ RUN yum install -y unzip ${PACKAGES} \
     && wget https://raw.githubusercontent.com/nokia/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec -O - | \
 	sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" | tee kong-oidc-${KONG_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
+    # Patch nginx_kong.lua for kong-oidc session_secret
+    && sed -i "/server_name kong;/a set_decode_base64 \$session_secret '`openssl rand -base64 32`';" /usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/nginx_kong.lua \
     # Build kong-http-to-https-redirect
     && wget https://raw.githubusercontent.com/HappyValleyIO/kong-http-to-https-redirect/master/kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
     && luarocks build kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
