@@ -17,7 +17,7 @@ RUN yum install -y unzip ${PACKAGES} \
 	sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" | tee kong-oidc-${KONG_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
     # Build kong-http-to-https-redirect
-    && https://github.com/HappyValleyIO/kong-http-to-https-redirect/blob/master/kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
+    && wget https://raw.githubusercontent.com/HappyValleyIO/kong-http-to-https-redirect/master/kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
     && luarocks build kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
 ## Cleanup
     && rm -fr *.rock* \
