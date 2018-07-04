@@ -26,4 +26,9 @@
     - See: https://github.com/nokia/kong-oidc/issues/1
 - To enable the plugins, set tne env variable for the container with comma separated plugin values:
     - `KONG_CUSTOM_PLUGINS=oidc`
-- **kong-http-to-https-redirect** plugin is actually not working (yet), kong complains is not actually installed
+- **kong-http-to-https-redirect** plugin is actually not working (yet), kong complains is not actually installed or is not compatible with 0.13
+
+# Release notes
+- 2018-07-04:
+    - Updated rockspec [nokia/kong-oidc](https://github.com/nokia/kong-oidc) to 1.1.0-0
+    - Updated rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.6.0-1

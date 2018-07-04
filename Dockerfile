@@ -3,8 +3,8 @@ FROM kong:0.13-centos
 MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 
 ENV PACKAGES="openssl-devel gcc git" \
-    KONG_OIDC_VER="1.0.5-0" \
-    LUA_RESTY_OIDC_VER="1.5.4-1" \
+    KONG_OIDC_VER="1.1.0-0" \
+    LUA_RESTY_OIDC_VER="1.6.0-1" \
     KHTHR_VER="0.13.1-0"
 
 RUN yum install -y unzip ${PACKAGES} \
