@@ -4,7 +4,7 @@ MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 
 ENV PACKAGES="openssl-devel gcc git" \
     KONG_OIDC_VER="1.1.0-0" \
-    LUA_RESTY_OIDC_VER="1.6.0-1" \
+    LUA_RESTY_OIDC_VER="1.6.1-1" \
     KHTHR_VER="0.13.1-0"
 
 RUN yum install -y unzip ${PACKAGES} \

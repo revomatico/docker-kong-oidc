@@ -29,6 +29,8 @@
 - **kong-http-to-https-redirect** plugin is actually not working (yet), kong complains is not actually installed or is not compatible with 0.13
 
 # Release notes
-- 2018-07-04:
+- 2018-07-07 [0.13-1]:
+    - Updated rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.6.1-1
+- 2018-07-04 [0.13-0]:
     - Updated rockspec [nokia/kong-oidc](https://github.com/nokia/kong-oidc) to 1.1.0-0
     - Updated rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.6.0-1
