@@ -5,14 +5,14 @@
 - [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
 - Added [kong-http-to-https-redirect plugin](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
 
-# Kong v0.12
+# Kong v0.12 (not maintained anymore)
 - [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
 - OpenID Connect plugin: [kong-oidc](https://github.com/nokia/kong-oidc)
     - Based on: [lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc)
 
 # Memcached
 - Reference: https://github.com/bungle/lua-resty-session#pluggable-storage-adapters
-- To override the default sesion storage: **cookie** with memcached, set
+- To replace the default sesion storage: **cookie** with memcached, set
     - `KONG_X_SESSION_STORAGE=memcache`
 - Memcached hostname is by default **mcd-memcached** (in my case installed via helm in a Kubernetes cluster)
     - Set `KONG_X_SESSION_MEMCACHE_HOST=mynewhost`
@@ -24,9 +24,10 @@
 - Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'somerandomstring';`
     - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
     - See: https://github.com/nokia/kong-oidc/issues/1
-- To enable the plugins, set tne env variable for the container with comma separated plugin values:
-    - `KONG_CUSTOM_PLUGINS=oidc`
-- **kong-http-to-https-redirect** plugin is actually not working (yet), kong complains is not actually installed or is not compatible with 0.13
+- To enable the plugins, set the env variable for the container with comma separated plugin values:
+    - `KONG_CUSTOM_PLUGINS=oidc,aliyun-http-filter`
+- **kong-http-to-https-redirect** plugin is actually called internally **aliyun-http-filter**
+    - See: [issue #1](https://github.com/HappyValleyIO/kong-http-to-https-redirect/issues/1)
 
 # Release notes
 - 2018-07-07 [0.13-1]:
