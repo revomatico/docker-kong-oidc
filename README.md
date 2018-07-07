@@ -31,6 +31,6 @@
 # Release notes
 - 2018-07-07 [0.13-1]:
     - Updated rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.6.1-1
-- 2018-07-04 [0.13-0]:
+- 2018-07-04 [0.13]:
     - Updated rockspec [nokia/kong-oidc](https://github.com/nokia/kong-oidc) to 1.1.0-0
     - Updated rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.6.0-1

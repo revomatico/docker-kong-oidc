@@ -20,7 +20,17 @@ RUN yum install -y unzip ${PACKAGES} \
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/nginx_kong.lua \
     && sed -i "/server_name kong;/a\ \n    set_decode_base64 \$session_secret '`openssl rand -base64 32`';\n" "$TPL" \
  # Patch nginx_kong.lua to add for memcached sessions
-    && sed -i "/server_name kong;/a\ \n    set \$session_storage \${{X_SESSION_STORAGE}};\n    set \$session_memcache_prefix sessions;\n    set \$session_memcache_host \${{X_SESSION_MEMCACHE_HOST}};\n    set \$session_memcache_port \${{X_SESSION_MEMCACHE_PORT}};\n    set \$session_memcache_uselocking on;\n    set \$session_memcache_spinlockwait 10000;\n    set \$session_memcache_maxlockwait 30;\n    set \$session_memcache_pool_timeout 45;\n    set \$session_memcache_pool_size 10;\n" "$TPL" \
+    && sed -i "/server_name kong;/a\ \n\
+    set \$session_storage \${{X_SESSION_STORAGE}};\n\
+    set \$session_memcache_prefix sessions;\n\
+    set \$session_memcache_host \${{X_SESSION_MEMCACHE_HOST}};\n\
+    set \$session_memcache_port \${{X_SESSION_MEMCACHE_PORT}};\n\
+    set \$session_memcache_uselocking on;\n\
+    set \$session_memcache_spinlockwait 10000;\n\
+    set \$session_memcache_maxlockwait 30;\n\
+    set \$session_memcache_pool_timeout 45;\n\
+    set \$session_memcache_pool_size 10;\n\
+" "$TPL" \
  # Patch kong_defaults.lua to add custom variables that are replaced dynamically in the template above when kong is started
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/kong_defaults.lua \
     && sed -i "/\]\]/i x_session_storage = cookie\nx_session_memcache_host = mcd-memcached\nx_session_memcache_port = '11211'" "$TPL" \
