@@ -25,11 +25,11 @@
     - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
     - See: https://github.com/nokia/kong-oidc/issues/1
 - To enable the plugins, set the env variable for the container with comma separated plugin values:
-    - `KONG_CUSTOM_PLUGINS=oidc,aliyun-http-filter`
-- **kong-http-to-https-redirect** plugin is actually called internally **aliyun-http-filter**
-    - See: [issue #1](https://github.com/HappyValleyIO/kong-http-to-https-redirect/issues/1)
+    - `KONG_CUSTOM_PLUGINS=oidc,kong-http-to-https-redirect`
 
 # Release notes
+- 2018-08-10 [0.13-2]:
+    - Forced a rebuild to update rockspec [HappyValleyIO/kong-http-to-https-redirect](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
 - 2018-07-07 [0.13-1]:
     - Updated rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.6.1-1
 - 2018-07-04 [0.13]:
