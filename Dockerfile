@@ -35,7 +35,7 @@ RUN yum install -y unzip ${PACKAGES} \
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/kong_defaults.lua \
     && sed -i "/\]\]/i x_session_storage = cookie\nx_session_memcache_host = mcd-memcached\nx_session_memcache_port = '11211'" "$TPL" \
  # Build kong-http-to-https-redirect
-    && wget https://raw.githubusercontent.com/HappyValleyIO/kong-http-to-https-redirect/master/kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
+    && wget https://raw.githubusercontent.com/Laylo-abu/kong-http-to-https-redirect/master/kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
     && luarocks build kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
 ## Cleanup
     && rm -fr *.rock* \
