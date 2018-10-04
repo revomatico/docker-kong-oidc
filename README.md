@@ -28,6 +28,8 @@
     - `KONG_CUSTOM_PLUGINS=oidc,kong-http-to-https-redirect`
 
 # Release notes
+- 2018-10-01 [0.13-3]:
+    - Changed repo for kong-http-to-https-redirect to [Revomatico/kong-http-to-https-redirect](https://github.com/Revomatico/kong-http-to-https-redirect)
 - 2018-08-10 [0.13-2]:
     - Forced a rebuild to update rockspec [HappyValleyIO/kong-http-to-https-redirect](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
 - 2018-07-07 [0.13-1]:
