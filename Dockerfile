@@ -7,7 +7,7 @@ ENV PACKAGES="openssl-devel gcc git" \
     LUA_RESTY_OIDC_VER="1.6.1-1" \
     KHTHR_VER="0.13.1-0"
 
-RUN yum install -y unzip ${PACKAGES} \
+RUN yum update -y && yum install -y unzip ${PACKAGES} \
 ## Install plugins
  # Build lua-resty-openidc
     && wget https://raw.githubusercontent.com/zmartzone/lua-resty-openidc/master/lua-resty-openidc-${LUA_RESTY_OIDC_VER}.rockspec \
@@ -35,7 +35,7 @@ RUN yum install -y unzip ${PACKAGES} \
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/kong_defaults.lua \
     && sed -i "/\]\]/i x_session_storage = cookie\nx_session_memcache_host = mcd-memcached\nx_session_memcache_port = '11211'" "$TPL" \
  # Build kong-http-to-https-redirect
-    && wget https://raw.githubusercontent.com/Laylo-abu/kong-http-to-https-redirect/master/kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
+    && wget https://raw.githubusercontent.com/Revomatico/kong-http-to-https-redirect/master/kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
     && luarocks build kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
 ## Cleanup
     && rm -fr *.rock* \
