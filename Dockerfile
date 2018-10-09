@@ -1,4 +1,4 @@
-FROM kong:0.13-centos
+FROM kong:0.14-centos
 
 MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 

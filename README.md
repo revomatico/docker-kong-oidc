@@ -1,8 +1,11 @@
 # docker-kong-oidc
-> Builds a Docker image from base Kong + nokia/kong-oidc
+> Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
+
+# Kong v0.14
+- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
 
 # Kong v0.13
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
 - Added [kong-http-to-https-redirect plugin](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
 
 # Kong v0.12 (not maintained anymore)
@@ -28,7 +31,9 @@
     - `KONG_CUSTOM_PLUGINS=oidc,kong-http-to-https-redirect`
 
 # Release notes
-- 2018-10-10 [0.13-3]:
+- 2018-10-09 [0.14-1]:
+    - Upgraded to Kong 0.14
+- 2018-10-09 [0.13-3]:
     - Changed repo for kong-http-to-https-redirect to [Revomatico/kong-http-to-https-redirect](https://github.com/Revomatico/kong-http-to-https-redirect)
 - 2018-08-10 [0.13-2]:
     - Forced a rebuild to update rockspec [HappyValleyIO/kong-http-to-https-redirect](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
