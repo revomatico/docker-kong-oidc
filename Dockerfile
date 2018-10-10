@@ -23,7 +23,6 @@ RUN yum update -y && yum install -y unzip ${PACKAGES} \
     && sed -i "/server_name kong;/a\ \n\
     set \$session_storage \${{X_SESSION_STORAGE}};\n\
     set \$session_memcache_prefix sessions;\n\
-    set \$session_memcache_socket unix:///var/run/memcached/memcached.sock;\n\
     set \$session_memcache_host \${{X_SESSION_MEMCACHE_HOST}};\n\
     set \$session_memcache_port \${{X_SESSION_MEMCACHE_PORT}};\n\
     set \$session_memcache_uselocking on;\n\
