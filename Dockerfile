@@ -20,6 +20,7 @@ RUN yum update -y && yum install -y unzip ${PACKAGES} \
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/nginx_kong.lua \
     # May cause side effects when using another nginx under this kong
     #&& sed -i "/server_name kong;/a\ \n    set \$session_secret '`openssl rand -base64 32`';\n" "$TPL" \
+    && sed -i "/server_name kong;/a\ \n    set \$session_secret '';\n" "$TPL" \
  # Patch nginx_kong.lua to add for memcached sessions
     && sed -i "/server_name kong;/a\ \n\
     set \$session_storage \${{X_SESSION_STORAGE}};\n\
