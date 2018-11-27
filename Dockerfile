@@ -4,7 +4,7 @@ MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 
 ENV PACKAGES="openssl-devel gcc git" \
     KONG_OIDC_VER="1.1.0-0" \
-    LUA_RESTY_OIDC_VER="1.6.1-1" \
+    LUA_RESTY_OIDC_VER="1.7.0-2" \
     KHTHR_VER="0.13.1-0"
 
 RUN yum update -y && yum install -y unzip ${PACKAGES} \
@@ -18,7 +18,8 @@ RUN yum update -y && yum install -y unzip ${PACKAGES} \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
  # Patch nginx_kong.lua for kong-oidc session_secret
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/nginx_kong.lua \
-    && sed -i "/server_name kong;/a\ \n    set \$session_secret '`openssl rand -base64 32`';\n" "$TPL" \
+    # May cause side effects when using another nginx under this kong
+    #&& sed -i "/server_name kong;/a\ \n    set \$session_secret '`openssl rand -base64 32`';\n" "$TPL" \
  # Patch nginx_kong.lua to add for memcached sessions
     && sed -i "/server_name kong;/a\ \n\
     set \$session_storage \${{X_SESSION_STORAGE}};\n\

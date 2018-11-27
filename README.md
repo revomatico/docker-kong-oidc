@@ -31,6 +31,9 @@
     - `KONG_CUSTOM_PLUGINS=oidc,kong-http-to-https-redirect`
 
 # Release notes
+- 2018-11-27 [0.14-2]:
+    - Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.0-2
+    - Removed hardcoded $session_secret variable
 - 2018-10-09 [0.14-1]:
     - Upgraded to Kong 0.14
 - 2018-10-09 [0.13-3]:
