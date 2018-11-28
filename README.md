@@ -1,17 +1,21 @@
 # docker-kong-oidc
 > Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
 
+
 # Kong v0.14
 - [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+
 
 # Kong v0.13
 - [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
 - Added [kong-http-to-https-redirect plugin](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
 
+
 # Kong v0.12 (not maintained anymore)
 - [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
 - OpenID Connect plugin: [kong-oidc](https://github.com/nokia/kong-oidc)
     - Based on: [lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc)
+
 
 # Memcached
 - Reference: https://github.com/bungle/lua-resty-session#pluggable-storage-adapters
@@ -23,17 +27,22 @@
 - Memcached port is by default **11211**, override by setting:
     - `KONG_X_SESSION_MEMCACHE_PORT=12345`
 
+
 # Notes
 - Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'somerandomstring';`
     - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
     - See: https://github.com/nokia/kong-oidc/issues/1
 - To enable the plugins, set the env variable for the container with comma separated plugin values:
     - `KONG_CUSTOM_PLUGINS=oidc,kong-http-to-https-redirect`
+- A common default session_secret should be defined by setting env KONG_X_SESSION_SECRET
+
 
 # Release notes
 - 2018-11-27 [0.14-2]:
     - Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.0-2
-    - Removed hardcoded $session_secret variable
+    - Added env variable KONG_X_SESSION_SECRET to populate $session_secret variable with the same variable for all pods in the cluster
+    - Removed explicitly building lua-resty-openidc in Dockerfile, since is automatically done by luarocks build, since is a dependency of kong-oidc
+    - Set everything to run under regular user kong instead of root
 - 2018-10-09 [0.14-1]:
     - Upgraded to Kong 0.14
 - 2018-10-09 [0.13-3]:
