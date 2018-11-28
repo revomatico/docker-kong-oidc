@@ -40,7 +40,7 @@
 
 # Release notes
 - 2018-11-27 [0.14-2]:
-    - ~Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.0-2~ this causes issues, staying with 1.6.1-1 for now
+    - ~~Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.0-2~~ this causes issues, staying with 1.6.1-1 for now
     - Added env variable KONG_X_SESSION_SECRET to populate $session_secret variable with the same variable for all pods in the cluster
     - Removed explicitly building lua-resty-openidc in Dockerfile, since is automatically done by luarocks build, since is a dependency of kong-oidc
     - Set everything to run under regular user kong instead of root
