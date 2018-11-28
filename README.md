@@ -29,17 +29,18 @@
 
 
 # Notes
-- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'somerandomstring';`
+- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'some_base64_string';`
     - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
     - See: https://github.com/nokia/kong-oidc/issues/1
 - To enable the plugins, set the env variable for the container with comma separated plugin values:
-    - `KONG_CUSTOM_PLUGINS=oidc,kong-http-to-https-redirect`
+    - [Kong < 0.14] `KONG_CUSTOM_PLUGINS=oidc,kong-http-to-https-redirect`
+    - [Kong >= 0.14] `KONG_PLUGINS=bundled,oidc,kong-http-to-https-redirect`
 - A common default session_secret should be defined by setting env KONG_X_SESSION_SECRET
 
 
 # Release notes
 - 2018-11-27 [0.14-2]:
-    - Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.0-2
+    - ~Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.0-2~ this causes issues, staying with 1.6.1-1 for now
     - Added env variable KONG_X_SESSION_SECRET to populate $session_secret variable with the same variable for all pods in the cluster
     - Removed explicitly building lua-resty-openidc in Dockerfile, since is automatically done by luarocks build, since is a dependency of kong-oidc
     - Set everything to run under regular user kong instead of root
