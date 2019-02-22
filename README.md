@@ -1,9 +1,12 @@
 # docker-kong-oidc
 > Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
 
+# kong v1.0.3
+- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+
 
 # Kong v0.14
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
 
 
 # Kong v0.13
@@ -26,6 +29,10 @@
     - Alternatively, set up DNS entry for **mcd-memcached** to be resolved from within the container
 - Memcached port is by default **11211**, override by setting:
     - `KONG_X_SESSION_MEMCACHE_PORT=12345`
+- KONG_X_SESSION_MEMCACHE_SPINLOCKWAIT, default: 10000
+- KONG_X_SESSION_MEMCACHE_MAXLOCKWAIT, default: 30
+- KONG_X_SESSION_MEMCACHE_POOL_TIMEOUT, default: 10
+- KONG_X_SESSION_MEMCACHE_POOL_SIZE, default: 10
 
 
 # Notes
@@ -39,6 +46,11 @@
 
 
 # Release notes
+- 2019-02-21 [1.0.3]:
+    - Replaced **Revomatico/kong-http-to-https-redirect** with [dsteinkopf/kong-http-to-https-redirect](https://github.com/dsteinkopf/kong-http-to-https-redirect) as it has more fixes and improvements
+    - Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.1-1
+    - Using Kong 1.0.3 image
+    - Added new environment variables to configure memcached
 - 2018-11-27 [0.14-2]:
     - ~~Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.0-2~~ this causes issues, staying with 1.6.1-1 for now
     - Added env variable KONG_X_SESSION_SECRET to populate $session_secret variable with the same variable for all pods in the cluster
