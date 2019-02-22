@@ -46,6 +46,8 @@
 
 
 # Release notes
+- 2019-02-22 [1.0.3-1]:
+    - Kept creation of /usr/local/kong in Dockerfile
 - 2019-02-21 [1.0.3]:
     - Replaced **Revomatico/kong-http-to-https-redirect** with [dsteinkopf/kong-http-to-https-redirect](https://github.com/dsteinkopf/kong-http-to-https-redirect) as it has more fixes and improvements
     - Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.1-1
