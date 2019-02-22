@@ -57,5 +57,3 @@ x_session_memcache_pool_size = '10'\n\
     # Allow regular users to run these programs and bind to ports < 1024
     && setcap 'cap_net_bind_service=+ep' /usr/local/bin/kong \
     && setcap 'cap_net_bind_service=+ep' /usr/local/openresty/nginx/sbin/nginx
-
-USER kong
