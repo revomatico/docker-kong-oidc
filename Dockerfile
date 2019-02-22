@@ -53,7 +53,7 @@ x_session_memcache_pool_size = '10'\n\
     && rm -rf /var/cache/yum \
 ## Create kong and working directory (https://github.com/Kong/kong/issues/2690)
     && mkdir -p /usr/local/kong \
-    && chown kong:kong /usr/local/kong \
+    && chown -R kong:kong /usr/local/kong \
     # Allow regular users to run these programs and bind to ports < 1024
     && setcap 'cap_net_bind_service=+ep' /usr/local/bin/kong \
     && setcap 'cap_net_bind_service=+ep' /usr/local/openresty/nginx/sbin/nginx
