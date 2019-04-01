@@ -1,8 +1,12 @@
 # docker-kong-oidc
 > Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
 
-# Kong v1.0.3
+# Kong v1.1.1
 - [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+
+
+# Kong v1.0.3
+- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-1/Dockerfile)
 
 
 # Kong v0.14
