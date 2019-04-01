@@ -46,6 +46,8 @@
 
 
 # Release notes
+- 2019-04-02 [1.1.1-1]:
+    - Using Kong 1.1.1-centos image
 - 2019-02-22 [1.0.3-1]:
     - Kept creation of `/usr/local/kong` in Dockerfile
     - Removed Dockerfile's `USER` directive is incompatible with su-exec. See https://github.com/ncopa/su-exec/issues/2#issuecomment-336670196

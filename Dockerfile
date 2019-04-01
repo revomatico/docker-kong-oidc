@@ -1,14 +1,15 @@
-FROM kong:1.0.3-centos
+FROM kong:1.1.1-centos
 
 MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     KONG_OIDC_VER="1.1.0-0" \
-    # Stick to 1.6.1-1, as the latest version have issues with memcached stored sessions: very slow, times out, to investigate.
     LUA_RESTY_OIDC_VER="1.7.1-1" \
     KHTHR_VER="0.14.1-0"
 
 RUN yum update -y && yum install -y unzip wget hostname ${PACKAGES} \
+## Temporary: fix luarocks script interpreter, 1.1.1 bug
+    && sed -i 's,/tmp/build,,' /usr/local/bin/luarocks \
 ## Install plugins
  # Build kong-oidc and patch the rockspec because is not keeping up with lua-resty-openidc
     && wget https://raw.githubusercontent.com/nokia/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec -O - | \
