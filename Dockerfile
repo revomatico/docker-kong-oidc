@@ -8,7 +8,7 @@ ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     KHTHR_VER="0.14.1-0"
 
 RUN set -x \
-    && yum update -y && yum install -y unzip hostname ${PACKAGES} \
+    && yum update -y && yum install -y unzip ${PACKAGES} \
 ## Install plugins
  # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
 #    && curl -s https://raw.githubusercontent.com/nokia/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | \
@@ -51,6 +51,7 @@ x_session_memcache_pool_size = '10'\n\
     && rm -fr *.rock* \
     && yum remove -y ${PACKAGES} \
     && yum autoremove -y \
+    && yum install -y hostname \
     && yum clean all \
     && rm -rf /var/cache/yum \
 ## Create kong and working directory (https://github.com/Kong/kong/issues/2690)

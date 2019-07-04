@@ -55,6 +55,7 @@
 
 # Release notes
 - 2019-07-04 [1.2.1-2]:
+    - Correctly added **hostname** package in Dockerfile
     - Forced a commit to rebuild the image on docker hub, because of changes in kong-oidc plugin
 - 2019-07-01 [1.2.1-1]:
     - Bump to Kong 1.2.1-centos image
