@@ -45,8 +45,8 @@ x_session_memcache_pool_timeout = '10'\n\
 x_session_memcache_pool_size = '10'\n\
 " "$TPL" \
  # Build kong-http-to-https-redirect
-    && curl -s https://raw.githubusercontent.com/dsteinkopf/kong-http-to-https-redirect/repo-dsteinkopf/kong-http-to-https-redirect-${KHTHR_VER}.rockspec > kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
-    && luarocks build kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
+#    && curl -s https://raw.githubusercontent.com/dsteinkopf/kong-http-to-https-redirect/repo-dsteinkopf/kong-http-to-https-redirect-${KHTHR_VER}.rockspec > kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
+#    && luarocks build kong-http-to-https-redirect-${KHTHR_VER}.rockspec \
 ## Cleanup
     && rm -fr *.rock* \
     && yum remove -y ${PACKAGES} \
