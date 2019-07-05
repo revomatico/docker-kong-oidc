@@ -54,6 +54,8 @@
 
 
 # Release notes
+- 2019-07-04 [1.2.1-3]:
+    - Reverted to original nokia/kong-oidc, that uses lua-resty-oidc 1.6.1-1 - because of bad performance, again, with 1.7.1-1
 - 2019-07-04 [1.2.1-2]:
     - Correctly added **hostname** package in Dockerfile
     - Forced a commit to rebuild the image on docker hub, because of changes in kong-oidc plugin

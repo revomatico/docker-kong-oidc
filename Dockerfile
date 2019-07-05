@@ -3,17 +3,17 @@ FROM kong:1.2.1-centos
 MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
-    KONG_OIDC_VER="1.1.0-1" \
-    LUA_RESTY_OIDC_VER="1.7.1-1" \
+    KONG_OIDC_VER="1.1.0-0" \
+    LUA_RESTY_OIDC_VER="1.6.1-1" \
     KHTHR_VER="0.14.1-0"
 
 RUN set -x \
     && yum update -y && yum install -y unzip ${PACKAGES} \
 ## Install plugins
  # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
-#    && curl -s https://raw.githubusercontent.com/nokia/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | \
-#	sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_OIDC_VER}.rockspec \
-    && curl -s https://raw.githubusercontent.com/Revomatico/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec \
+    && curl -s https://raw.githubusercontent.com/nokia/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | \
+	sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_OIDC_VER}.rockspec \
+#    && curl -s https://raw.githubusercontent.com/Revomatico/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
  # Patch nginx_kong.lua for kong-oidc session_secret
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/nginx_kong.lua \
