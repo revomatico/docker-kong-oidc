@@ -54,8 +54,10 @@
 
 
 # Release notes
+- 2019-08-16 [1.2.2-1]:
+    - Bump to Kong 1.2.2-centos image
 - 2019-07-05 [1.2.1-4]:
-   - Removed **kong-http-to-https-redirect** in favor of the built in route attribute: [https_redirect_status_code=301](https://docs.konghq.com/1.2.x/admin-api/#create-route)
+    - Removed **kong-http-to-https-redirect** in favor of the built in route attribute: [https_redirect_status_code=301](https://docs.konghq.com/1.2.x/admin-api/#create-route)
 - 2019-07-04 [1.2.1-3]:
     - Reverted to original nokia/kong-oidc, that uses lua-resty-oidc 1.6.1-1 - because of bad performance, again, with 1.7.1-1
 - 2019-07-04 [1.2.1-2]:
