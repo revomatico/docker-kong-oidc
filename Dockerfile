@@ -4,7 +4,7 @@ MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     KONG_OIDC_VER="1.1.0-0" \
-    LUA_RESTY_OIDC_VER="1.6.1-1" \
+    LUA_RESTY_OIDC_VER="1.7.1-1" \
     KHTHR_VER="0.14.1-0"
 
 RUN set -x \
