@@ -23,8 +23,9 @@ RUN set -x \
  # Patch nginx_kong.lua to add for memcached sessions
     && sed -i "/server_name kong;/a\ \n\
     set \$session_storage \${{X_SESSION_STORAGE}};\n\
+    set \$session_name \${{X_SESSION_NAME}};\n\
     # Memcached specific
-    set \$session_memcache_prefix sessions;\n\
+    set \$session_memcache_prefix oidc_sessions;\n\
     set \$session_memcache_host \${{X_SESSION_MEMCACHE_HOST}};\n\
     set \$session_memcache_port \${{X_SESSION_MEMCACHE_PORT}};\n\
     set \$session_memcache_uselocking on;\n\
@@ -36,6 +37,7 @@ RUN set -x \
  # Patch kong_defaults.lua to add custom variables that are replaced dynamically in the template above when kong is started
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/kong_defaults.lua \
     && sed -i "/\]\]/i x_session_storage = cookie\n\
+x_session_name = oidc_session\n\
 x_session_memcache_host = mcd-memcached\n\
 x_session_memcache_port = '11211'\n\
 x_session_secret = ''\n\

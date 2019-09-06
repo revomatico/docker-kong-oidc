@@ -56,6 +56,8 @@
 
 
 # Release notes
+- 2019-09-05 [1.3.0-2]:
+    - Introduced `session_name` to override the default 'session' with 'oidc_session' as it may be overriden by upstream applications.
 - 2019-08-16 [1.3.0-1]:
     - Bump to Kong 1.3.0-centos image
     - Trying again lua-resty-oidc 1.7.2-1
