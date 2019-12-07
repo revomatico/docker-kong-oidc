@@ -1,54 +1,49 @@
 # docker-kong-oidc
 > Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
 
-# Kong v1.4.1
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
-
-# Kong v1.4.0
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
-
-# Kong v1.3.0
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
-
-# Kong v1.2.2
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.2.2-1/Dockerfile)
-
-# Kong v1.1.2
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.1.2-1/Dockerfile)
-
-
-# Kong v1.0.3
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.0.3-1/Dockerfile)
-
-
-# Kong v0.14
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
-
-
-# Kong v0.13
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
-- Added [kong-http-to-https-redirect plugin](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
-
-
-# Kong v0.12 (not maintained anymore)
-- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
-- OpenID Connect plugin: [kong-oidc](https://github.com/nokia/kong-oidc)
+## Releases
+- Kong v1.4.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v1.4.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
+- Kong v1.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
+- Kong v1.2.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.2.2-1/Dockerfile)
+- Kong v1.1.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.1.2-1/Dockerfile)
+- Kong v1.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.0.3-1/Dockerfile)
+- Kong v0.14: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
+- Kong v0.13: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
+    - Added [kong-http-to-https-redirect plugin](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
+- Kong v0.12:  [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
+    - OpenID Connect plugin: [kong-oidc](https://github.com/nokia/kong-oidc)
     - Based on: [lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc)
 
 
-# Memcached
-- Reference: https://github.com/bungle/lua-resty-session#pluggable-storage-adapters
-- To replace the default sesion storage: **cookie** with memcached, set
+## Memcached
+- Reference: https://github.com/bungle/lua-resty-session#memcache-storage-adapter
+- To replace the default sesion storage: **cookie** with **memcache**, set
     - `KONG_X_SESSION_STORAGE=memcache`
 - Memcached hostname is by default **mcd-memcached** (in my case installed via helm in a Kubernetes cluster)
     - Set `KONG_X_SESSION_MEMCACHE_HOST=mynewhost`
-    - Alternatively, set up DNS entry for **mcd-memcached** to be resolved from within the container
+    - Alternatively, set up DNS entry for **memcached** to be resolved from within the container
 - Memcached port is by default **11211**, override by setting:
     - `KONG_X_SESSION_MEMCACHE_PORT=12345`
+- KONG_X_SESSION_MEMCACHE_USELOCKING, default: off
 - KONG_X_SESSION_MEMCACHE_SPINLOCKWAIT, default: 10000
 - KONG_X_SESSION_MEMCACHE_MAXLOCKWAIT, default: 30
 - KONG_X_SESSION_MEMCACHE_POOL_TIMEOUT, default: 10
 - KONG_X_SESSION_MEMCACHE_POOL_SIZE, default: 10
+
+
+## Shm
+- Reference: https://github.com/bungle/lua-resty-session#shared-dictionary-storage-adapter
+- To replace the default sesion storage: **cookie** with **shm**, set
+    - `KONG_X_SESSION_STORAGE=shm`
+- KONG_X_SESSION_SHM_STORE, default: oidc_sessions
+- KONG_X_SESSION_SHM_STORE_SIZE, default: 5m
+- KONG_X_SESSION_SHM_USELOCKING, default: no
+- KONG_X_SESSION_SHM_LOCK_EXPTIME, default: 30
+- KONG_X_SESSION_SHM_LOCK_TIMEOUT, default: 5
+- KONG_X_SESSION_SHM_LOCK_STEP, default: 0.001
+- KONG_X_SESSION_SHM_LOCK_RATIO, default: 2
+- KONG_X_SESSION_SHM_LOCK_MAX_STEP, default: 0.5
 
 
 # Notes
@@ -56,15 +51,18 @@
     - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
     - See: https://github.com/nokia/kong-oidc/issues/1
 - To enable the plugins, set the env variable for the container with comma separated plugin values:
-    - [Kong < 0.14] `KONG_CUSTOM_PLUGINS=oidc,kong-http-to-https-redirect`
-    - [Kong >= 0.14] `KONG_PLUGINS=bundled,oidc,kong-http-to-https-redirect`
+    - [Kong < 0.14] `KONG_CUSTOM_PLUGINS=oidc`
+    - [Kong >= 0.14] `KONG_PLUGINS=bundled,oidc`
 - A common default session_secret should be defined by setting env KONG_X_SESSION_SECRET
+- KONG_X_SESSION_NAME=oidc_session
 
 
 # Release notes
 - 2019-10-28 [1.4.1-1]:
     - Bumped Kong version to 1.4.1
     - Added shm session storage support
+    - Added test.sh to quickly validate the build
+    - Improved README.md
 - 2019-10-28 [1.4.0-1]:
     - Bumped Kong version to 1.4.0
 - 2019-09-05 [1.3.0-2]:

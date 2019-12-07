@@ -18,8 +18,8 @@ RUN set -x \
     # May cause side effects when using another nginx under this kong, unless set to the same value
     && sed -i "/server_name kong;/a\ \n\
     set_decode_base64 \$session_secret \${{X_SESSION_SECRET}};\n" "$TPL" \
- # Patch nginx_kong.lua to insert shm memory
-    && sed -i -E '/^lua_shared_dict kong\s+.+$/i lua_shared_dict \${{X_SESSION_SHM_STORE}} \${{X_SESSION_SHM_STORE_SIZE}};' "$TPL" \
+ # Patch nginx_kong.lua to insert shm size
+    && sed -i -E '/^lua_shared_dict kong\s+.+$/i variables_hash_max_size 2048;\nlua_shared_dict \${{X_SESSION_SHM_STORE}} \${{X_SESSION_SHM_STORE_SIZE}};' "$TPL" \
  # Patch nginx_kong.lua to add for memcached sessions
     && sed -i "/server_name kong;/a\ \n\
     set \$session_storage \${{X_SESSION_STORAGE}};\n\
@@ -47,12 +47,12 @@ RUN set -x \
     && sed -i "/\]\]/i x_session_storage = cookie\n\
 \n\
 x_session_name = oidc_session\n\
+x_session_secret = ''\n\
 \n\
-x_session_memcache_prefix = 'oidc_sessions'\n\
+x_session_memcache_prefix = oidc_sessions\n\
 x_session_memcache_host = memcached\n\
 x_session_memcache_port = '11211'\n\
-x_session_secret = ''\n\
-x_session_memcache_uselocking = 'off'\n\
+x_session_memcache_uselocking = off\n\
 x_session_memcache_spinlockwait = '10000'\n\
 x_session_memcache_maxlockwait = '30'\n\
 x_session_memcache_pool_timeout = '10'\n\
@@ -60,7 +60,7 @@ x_session_memcache_pool_size = '10'\n\
 \n\
 x_session_shm_store_size = 5m\n\
 x_session_shm_store = oidc_sessions\n\
-x_session_shm_uselocking = 'off'\n\
+x_session_shm_uselocking = off\n\
 x_session_shm_lock_exptime = '30'\n\
 x_session_shm_lock_timeout = '5'\n\
 x_session_shm_lock_step = '0.001'\n\
