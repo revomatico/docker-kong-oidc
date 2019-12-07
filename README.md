@@ -1,8 +1,11 @@
 # docker-kong-oidc
 > Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
 
-# Kong v1.4.0
+# Kong v1.4.1
 - [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+
+# Kong v1.4.0
+- [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
 
 # Kong v1.3.0
 - [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
@@ -59,6 +62,9 @@
 
 
 # Release notes
+- 2019-10-28 [1.4.1-1]:
+    - Bumped Kong version to 1.4.1
+    - Added shm session storage support
 - 2019-10-28 [1.4.0-1]:
     - Bumped Kong version to 1.4.0
 - 2019-09-05 [1.3.0-2]:
