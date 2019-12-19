@@ -1,4 +1,4 @@
-FROM kong:1.4.1-centos
+FROM kong:1.4.2-centos
 
 MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 
@@ -17,14 +17,23 @@ RUN set -x \
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/nginx_kong.lua \
     # May cause side effects when using another nginx under this kong, unless set to the same value
     && sed -i "/server_name kong;/a\ \n\
-    set_decode_base64 \$session_secret \${{X_SESSION_SECRET}};\n" "$TPL" \
- # Patch nginx_kong.lua to insert shm size
-    && sed -i -E '/^lua_shared_dict kong\s+.+$/i variables_hash_max_size 2048;\nlua_shared_dict \${{X_SESSION_SHM_STORE}} \${{X_SESSION_SHM_STORE_SIZE}};' "$TPL" \
+set_decode_base64 \$session_secret \${{X_SESSION_SECRET}};\n" "$TPL" \
+ # Patch nginx_kong.lua to set dictionaries
+    && sed -i -E '/^lua_shared_dict kong\s+.+$/i\ \n\
+variables_hash_max_size 2048;\n\
+> if x_session_storage == "shm" then\n\
+lua_shared_dict \${{X_SESSION_SHM_STORE}} \${{X_SESSION_SHM_STORE_SIZE}};\n\
+> end\n\
+> if not \(x_proxy_cache_storage_name == "kong_cache"\) then\n\
+lua_shared_dict \${{X_PROXY_CACHE_STORAGE_NAME}} \${{X_PROXY_CACHE_STORAGE_SIZE}};\n\
+> end\n\
+' "$TPL" \
  # Patch nginx_kong.lua to add for memcached sessions
     && sed -i "/server_name kong;/a\ \n\
+    ## Session:
     set \$session_storage \${{X_SESSION_STORAGE}};\n\
     set \$session_name \${{X_SESSION_NAME}};\n\
-    # Memcached specific
+    ## Session: Memcached specific
     set \$session_memcache_prefix \${{X_SESSION_MEMCACHE_PREFIX}};\n\
     set \$session_memcache_host \${{X_SESSION_MEMCACHE_HOST}};\n\
     set \$session_memcache_port \${{X_SESSION_MEMCACHE_PORT}};\n\
@@ -33,7 +42,7 @@ RUN set -x \
     set \$session_memcache_maxlockwait \${{X_SESSION_MEMCACHE_MAXLOCKWAIT}};\n\
     set \$session_memcache_pool_timeout \${{X_SESSION_MEMCACHE_POOL_TIMEOUT}};\n\
     set \$session_memcache_pool_size \${{X_SESSION_MEMCACHE_POOL_SIZE}};\n\
-    # SHM Specific
+    ## Session: SHM Specific
     set \$session_shm_store \${{X_SESSION_SHM_STORE}};\n\
     set \$session_shm_uselocking \${{X_SESSION_SHM_USELOCKING}};\n\
     set \$session_shm_lock_exptime \${{X_SESSION_SHM_LOCK_EXPTIME}};\n\
@@ -44,8 +53,11 @@ RUN set -x \
 " "$TPL" \
  # Patch kong_defaults.lua to add custom variables that are replaced dynamically in the template above when kong is started
     && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/kong_defaults.lua \
-    && sed -i "/\]\]/i x_session_storage = cookie\n\
+    && sed -i "/\]\]/i\ \n\
+x_proxy_cache_storage_size = 5m\n\
+x_proxy_cache_storage_name = kong_cache\n\
 \n\
+x_session_storage = cookie\n\
 x_session_name = oidc_session\n\
 x_session_secret = ''\n\
 \n\

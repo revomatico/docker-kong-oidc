@@ -1,8 +1,10 @@
 # docker-kong-oidc
 > Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
 
+
 ## Releases
-- Kong v1.4.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v1.4.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v1.4.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.1-1/Dockerfile)
 - Kong v1.4.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
 - Kong v1.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
 - Kong v1.2.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.2.2-1/Dockerfile)
@@ -10,13 +12,10 @@
 - Kong v1.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.0.3-1/Dockerfile)
 - Kong v0.14: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
 - Kong v0.13: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
-    - Added [kong-http-to-https-redirect plugin](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
 - Kong v0.12:  [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
-    - OpenID Connect plugin: [kong-oidc](https://github.com/nokia/kong-oidc)
-    - Based on: [lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc)
 
 
-## Memcached
+## Session: Memcached
 - Reference: https://github.com/bungle/lua-resty-session#memcache-storage-adapter
 - To replace the default sesion storage: **cookie** with **memcache**, set
     - `KONG_X_SESSION_STORAGE=memcache`
@@ -32,7 +31,7 @@
 - KONG_X_SESSION_MEMCACHE_POOL_SIZE, default: 10
 
 
-## Shm
+## Session: Shm
 - Reference: https://github.com/bungle/lua-resty-session#shared-dictionary-storage-adapter
 - To replace the default sesion storage: **cookie** with **shm**, set
     - `KONG_X_SESSION_STORAGE=shm`
@@ -45,6 +44,10 @@
 - KONG_X_SESSION_SHM_LOCK_RATIO, default: 2
 - KONG_X_SESSION_SHM_LOCK_MAX_STEP, default: 0.5
 
+## Proxy cache plugin storage
+- Reference: https://docs.konghq.com/hub/kong-inc/proxy-cache/
+- KONG_X_PROXY_CACHE_STORAGE_NAME, default: kong_cache
+- KONG_X_PROXY_CACHE_STORAGE_SIZE, default: 5m (set only if KONG_X_CACHE_PLUGIN_STORAGE_NAME is not kong_cache)
 
 # Notes
 - Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'some_base64_string';`
@@ -58,6 +61,9 @@
 
 
 # Release notes
+- 2019-11-19 [1.4.2-1]:
+    - Bumped Kong version to 1.4.2
+    - Added proxy cache plugin custom dictionary
 - 2019-10-28 [1.4.1-1]:
     - Bumped Kong version to 1.4.1
     - Added shm session storage support
