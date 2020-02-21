@@ -1,4 +1,4 @@
-FROM kong:1.4.2-centos
+FROM kong:1.5.0-centos
 
 MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
 
@@ -10,7 +10,7 @@ RUN set -x \
     && yum update -y && yum install -y unzip ${PACKAGES} \
 ## Install plugins
  # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
-    && curl -s https://raw.githubusercontent.com/jerfer/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec | \
+    && curl -s https://raw.githubusercontent.com/Revomatico/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec | \
         sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
  # Patch nginx_kong.lua for kong-oidc session_secret

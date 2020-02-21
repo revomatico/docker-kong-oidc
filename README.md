@@ -3,7 +3,8 @@
 
 
 ## Releases
-- Kong v1.4.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v1.5.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v1.4.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.2-1/Dockerfile)
 - Kong v1.4.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.1-1/Dockerfile)
 - Kong v1.4.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
 - Kong v1.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
@@ -61,6 +62,9 @@
 
 
 # Release notes
+- 2020-02-21 [1.5.0-1]:
+    - Bumped Kong version to 1.5.0, the last 1.x version
+    - Using [Revomatico/kong-oidc](https://github.com/Revomatico/kong-oidc) repo
 - 2019-11-19 [1.4.2-1]:
     - Bumped Kong version to 1.4.2
     - Added proxy cache plugin custom dictionary
