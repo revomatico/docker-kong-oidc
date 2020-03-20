@@ -1,20 +1,33 @@
-FROM kong:1.5.0-centos
+FROM kong:2.0.2
 
-MAINTAINER Cristian Chiru <cristian.chiru@revomatico.com>
+USER root
+
+LABEL maintainer.1="Rami Abusereya <rami.abusereya@revomatico.com>" \
+  maintainer.2="Cristian Chiru <cristian.chiru@revomatico.com>"
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
-    KONG_OIDC_VER="1.1.0-1" \
+    KONG_OIDC_VER="1.2.0-1" \
     LUA_RESTY_OIDC_VER="1.7.2-1"
 
-RUN set -x \
-    && yum update -y && yum install -y unzip ${PACKAGES} \
+RUN set -ex \
+  && apk --no-cache add \
+    libssl1.1 \
+    openssl \
+    curl \
+    unzip \
+    git \
+  && apk --no-cache add --virtual .build-dependencies \
+    make \
+    gcc \
+    openssl-dev \
+  \
 ## Install plugins
  # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
     && curl -s https://raw.githubusercontent.com/Revomatico/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec | \
         sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
  # Patch nginx_kong.lua for kong-oidc session_secret
-    && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/nginx_kong.lua \
+    && TPL=/usr/local/share/lua/5.1/kong/templates/nginx_kong.lua \
     # May cause side effects when using another nginx under this kong, unless set to the same value
     && sed -i "/server_name kong;/a\ \n\
 set_decode_base64 \$session_secret \${{X_SESSION_SECRET}};\n" "$TPL" \
@@ -52,7 +65,7 @@ lua_shared_dict \${{X_PROXY_CACHE_STORAGE_NAME}} \${{X_PROXY_CACHE_STORAGE_SIZE}
     set \$session_shm_lock_max_step \${{X_SESSION_SHM_LOCK_MAX_STEP}};\n\
 " "$TPL" \
  # Patch kong_defaults.lua to add custom variables that are replaced dynamically in the template above when kong is started
-    && TPL=/usr/local/share/lua/`lua <<< "print(_VERSION)" | awk '{print $2}'`/kong/templates/kong_defaults.lua \
+    && TPL=/usr/local/share/lua/5.1/kong/templates/kong_defaults.lua \
     && sed -i "/\]\]/i\ \n\
 x_proxy_cache_storage_size = 5m\n\
 x_proxy_cache_storage_name = kong_cache\n\
@@ -82,14 +95,10 @@ x_session_shm_lock_max_step = '0.5'\n\
 " "$TPL" \
 ## Cleanup
     && rm -fr *.rock* \
-    && yum remove -y ${PACKAGES} \
-    && yum autoremove -y \
-    && yum install -y hostname \
-    && yum clean all \
-    && rm -rf /var/cache/yum \
+    && apk del .build-dependencies 2>/dev/null \
 ## Create kong and working directory (https://github.com/Kong/kong/issues/2690)
     && mkdir -p /usr/local/kong \
-    && chown -R kong:kong /usr/local/kong \
+    && chown -R kong:`id -gn kong` /usr/local/kong \
     # Allow regular users to run these programs and bind to ports < 1024
     && setcap 'cap_net_bind_service=+ep' /usr/local/bin/kong \
     && setcap 'cap_net_bind_service=+ep' /usr/local/openresty/nginx/sbin/nginx
