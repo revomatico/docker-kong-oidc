@@ -17,6 +17,10 @@
 - Kong v0.13: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
 - Kong v0.12:  [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
 
+## Session: Cookie
+- This is the default, but not recommended. I would recommend **shm** for a lightweight deployment.
+- If you have too much information in the session (claims, etc), you may need to [increase the nginx header size](https://github.com/bungle/lua-resty-session#cookie-storage-adapter):
+    - `KONG_NGINX_LARGE_CLIENT_HEADER_BUFFERS='4 16k'`
 
 ## Session: Memcached
 - Reference: https://github.com/bungle/lua-resty-session#memcache-storage-adapter
