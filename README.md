@@ -3,7 +3,8 @@
 
 
 ## Releases
-- Kong v2.0.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.0.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 - Kong v1.5.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.5.0-1/Dockerfile)
 - Kong v1.4.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.2-1/Dockerfile)
 - Kong v1.4.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.1-1/Dockerfile)
@@ -63,6 +64,8 @@
 
 
 # Release notes
+- 2020-04-12 [2.0.3-1]:
+    - Bumped Kong version to 2.0.3
 - 2020-03-20 [2.0.2-1]:
     - Bumped Kong version to 2.0.2, using alpine image instead of centos
 - 2020-02-21 [1.5.0-1]:
