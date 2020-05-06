@@ -2,4 +2,4 @@
 
 # Common script used by all others to define variables and stay DRY
 DOCKER_CONTAINER='docker-kong-oidc'
-DOCKER_IMAGE="local/$DOCKER_CONTAINER:2.0.3-1"
+DOCKER_IMAGE="local/$DOCKER_CONTAINER:2.0.4-1"

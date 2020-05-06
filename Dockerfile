@@ -1,4 +1,4 @@
-FROM kong:2.0.3
+FROM kong:2.0.4
 
 USER root
 
@@ -6,7 +6,7 @@ LABEL maintainer.1="Rami Abusereya <rami.abusereya@revomatico.com>" \
   maintainer.2="Cristian Chiru <cristian.chiru@revomatico.com>"
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
-    KONG_OIDC_VER="1.2.0-1" \
+    KONG_OIDC_VER="1.2.1-1" \
     LUA_RESTY_OIDC_VER="1.7.2-1"
 
 RUN set -ex \
