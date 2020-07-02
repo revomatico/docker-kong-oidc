@@ -72,6 +72,9 @@
 
 
 # Release notes
+- 2020-07-02 [2.0.5-2]:
+    - Using kong-plugin-session 2.4.1
+    - Using lua-resty-session 3.5
 - 2020-07-02 [2.0.5-1]:
     - Bumped Kong version to 2.0.5
     - Add memcache env vars

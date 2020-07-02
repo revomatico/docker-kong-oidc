@@ -7,7 +7,8 @@ LABEL maintainer.1="Rami Abusereya <rami.abusereya@revomatico.com>" \
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     KONG_OIDC_VER="1.2.1-1" \
-    LUA_RESTY_OIDC_VER="1.7.2-1"
+    LUA_RESTY_OIDC_VER="1.7.2-1" \
+    KONG_PLUGIN_SESSION_VER="2.4.1"
 
 RUN set -ex \
   && apk --no-cache add \
@@ -22,8 +23,14 @@ RUN set -ex \
     openssl-dev \
   \
 ## Install plugins
+ # Remove old lua-resty-session and dependent kong-plugin-session
+    && luarocks remove --force kong-plugin-session \
+    && luarocks remove --force lua-resty-session \
+ # Build kong-plugin-session
+    && curl -sL https://raw.githubusercontent.com/Kong/kong-plugin-session/${KONG_PLUGIN_SESSION_VER}/kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec | tee kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec \
+    && luarocks build kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec \
  # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
-    && curl -s https://raw.githubusercontent.com/Revomatico/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec | \
+    && curl -sL https://raw.githubusercontent.com/Revomatico/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec | \
         sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
  # Patch nginx_kong.lua for kong-oidc session_secret
