@@ -3,7 +3,8 @@
 
 
 ## Releases
-- Kong v2.0.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.0.5: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.0.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.4-1/Dockerfile)
 - Kong v2.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.3-1/Dockerfile)
 - Kong v2.0.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 - Kong v1.5.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.5.0-1/Dockerfile)
@@ -33,13 +34,15 @@
 - Memcached port is by default **11211**, override by setting:
     - `KONG_X_SESSION_MEMCACHE_PORT=12345`
 - KONG_X_SESSION_MEMCACHE_USELOCKING, default: off
-- KONG_X_SESSION_MEMCACHE_SPINLOCKWAIT, default: 10000
+- KONG_X_SESSION_MEMCACHE_SPINLOCKWAIT, default: 150
 - KONG_X_SESSION_MEMCACHE_MAXLOCKWAIT, default: 30
 - KONG_X_SESSION_MEMCACHE_POOL_TIMEOUT, default: 10
 - KONG_X_SESSION_MEMCACHE_POOL_SIZE, default: 10
+- KONG_X_SESSION_MEMCACHE_CONNECT_TIMEOUT, default 1000 (milliseconds)
+- KONG_X_SESSION_MEMCACHE_SEND_TIMEOUT, default 1000 (milliseconds)
+- KONG_X_SESSION_MEMCACHE_READ_TIMEOUT, default 1000 (milliseconds)
 
-
-## Session: Shm
+## Session: SHM
 - Reference: https://github.com/bungle/lua-resty-session#shared-dictionary-storage-adapter
 - To replace the default sesion storage: **cookie** with **shm**, set
     - `KONG_X_SESSION_STORAGE=shm`
@@ -69,6 +72,9 @@
 
 
 # Release notes
+- 2020-07-02 [2.0.5-1]:
+    - Bumped Kong version to 2.0.5
+    - Add memcache env vars
 - 2020-05-06 [2.0.4-1]:
     - Bumped Kong version to 2.0.4
     - Bumped kong-oidc plugin to 1.2.1-1 after implementing PR [nokia#132](https://github.com/nokia/kong-oidc/pull/132)

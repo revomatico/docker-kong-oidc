@@ -1,4 +1,4 @@
-FROM kong:2.0.4
+FROM kong/kong:2.0.5
 
 USER root
 
@@ -47,6 +47,9 @@ lua_shared_dict \${{X_PROXY_CACHE_STORAGE_NAME}} \${{X_PROXY_CACHE_STORAGE_SIZE}
     set \$session_storage \${{X_SESSION_STORAGE}};\n\
     set \$session_name \${{X_SESSION_NAME}};\n\
     ## Session: Memcached specific
+    set \$session_memcache_connect_timeout \${{X_SESSION_MEMCACHE_CONNECT_TIMEOUT}};\n\
+    set \$session_memcache_send_timeout \${{X_SESSION_MEMCACHE_SEND_TIMEOUT}};\n\
+    set \$session_memcache_read_timeout \${{X_SESSION_MEMCACHE_READ_TIMEOUT}};\n\
     set \$session_memcache_prefix \${{X_SESSION_MEMCACHE_PREFIX}};\n\
     set \$session_memcache_host \${{X_SESSION_MEMCACHE_HOST}};\n\
     set \$session_memcache_port \${{X_SESSION_MEMCACHE_PORT}};\n\
@@ -75,10 +78,13 @@ x_session_name = oidc_session\n\
 x_session_secret = ''\n\
 \n\
 x_session_memcache_prefix = oidc_sessions\n\
+x_session_memcache_connect_timeout = '1000'\n\
+x_session_memcache_send_timeout = '1000'\n\
+x_session_memcache_read_timeout = '1000'\n\
 x_session_memcache_host = memcached\n\
 x_session_memcache_port = '11211'\n\
 x_session_memcache_uselocking = off\n\
-x_session_memcache_spinlockwait = '10000'\n\
+x_session_memcache_spinlockwait = '150'\n\
 x_session_memcache_maxlockwait = '30'\n\
 x_session_memcache_pool_timeout = '10'\n\
 x_session_memcache_pool_size = '10'\n\
