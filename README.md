@@ -20,15 +20,19 @@
 - Kong v0.12:  [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
 
 ## Session: Cookie
-- This is the default, but not recommended. I would recommend **shm** for a lightweight deployment.
+- This is the default, but not recommended. I would recommend **shm** for a single instance, lightweight deployment.
 - If you have too much information in the session (claims, etc), you may need to [increase the nginx header size](https://github.com/bungle/lua-resty-session#cookie-storage-adapter):
     - `KONG_NGINX_LARGE_CLIENT_HEADER_BUFFERS='4 16k'`
 
 ## Session: Memcached
+
+> Instead of actual memcached, Hazelcast (that is Kubernetes aware), with memcache protocol enabled should be used.
+> See https://docs.hazelcast.org/docs/latest-dev/manual/html-single/#memcache-client.
+
 - Reference: https://github.com/bungle/lua-resty-session#memcache-storage-adapter
-- To replace the default sesion storage: **cookie** with **memcache**, set
+- To replace the default sesion storage: **cookie**, set
     - `KONG_X_SESSION_STORAGE=memcache`
-- Memcached hostname is by default **mcd-memcached** (in my case installed via helm in a Kubernetes cluster)
+- Memcached hostname is by default **memcached** (in my case installed via helm in a Kubernetes cluster)
     - Set `KONG_X_SESSION_MEMCACHE_HOST=mynewhost`
     - Alternatively, set up DNS entry for **memcached** to be resolved from within the container
 - Memcached port is by default **11211**, override by setting:
@@ -42,7 +46,30 @@
 - KONG_X_SESSION_MEMCACHE_SEND_TIMEOUT, default 1000 (milliseconds)
 - KONG_X_SESSION_MEMCACHE_READ_TIMEOUT, default 1000 (milliseconds)
 
+## Session: DSHM (Hazelcast + Vertex)
+
+> This lua-resty-session implementation depends on [grrolland/ngx-distributed-shm](https://github.com/grrolland/ngx-distributed-shm) dshm.lua library.
+> It embeds an older version of Hazelcast (3.11) and is not kubernetes aware. It introduces an additional communication protocol.
+> Recommended: Hazelcast with memcache protocol enabled (see above).
+
+- Reference: https://github.com/bungle/lua-resty-session#dshm-storage-adapter
+- To replace the default sesion storage: **cookie**, set
+    - `KONG_X_SESSION_STORAGE=dshm`
+- X_SESSION_DSHM_REGION, default: oidc_sessions
+- X_SESSION_DSHM_CONNECT_TIMEOUT, default: 1000
+- X_SESSION_DSHM_SEND_TIMEOUT, default: 1000
+- X_SESSION_DSHM_READ_TIMEOUT, default: 1000
+- X_SESSION_DSHM_HOST, default: hazelcast
+- X_SESSION_DSHM_PORT, default: 4321
+- X_SESSION_DSHM_POOL_NAME, default: oidc_sessions
+- X_SESSION_DSHM_POOL_TIMEOUT, default: 1000
+- X_SESSION_DSHM_POOL_SIZE, default: 10
+- X_SESSION_DSMM_POOL_BACKLOG, default: 10
+
 ## Session: SHM
+
+> Good for single instance. No additional software is required.
+
 - Reference: https://github.com/bungle/lua-resty-session#shared-dictionary-storage-adapter
 - To replace the default sesion storage: **cookie** with **shm**, set
     - `KONG_X_SESSION_STORAGE=shm`
@@ -72,6 +99,8 @@
 
 
 # Release notes
+- 2020-07-03 [2.0.5-3]:
+    - Added DSHM (Hazelcast) session storage support using [ngx-distributed-shm](https://github.com/grrolland/ngx-distributed-shm/) dshm.lua library
 - 2020-07-02 [2.0.5-2]:
     - Using kong-plugin-session 2.4.1
     - Using lua-resty-session 3.5

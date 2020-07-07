@@ -6,9 +6,11 @@ LABEL maintainer.1="Rami Abusereya <rami.abusereya@revomatico.com>" \
   maintainer.2="Cristian Chiru <cristian.chiru@revomatico.com>"
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
+    LUA_BASE_DIR="/usr/local/share/lua/5.1" \
     KONG_OIDC_VER="1.2.1-1" \
     LUA_RESTY_OIDC_VER="1.7.2-1" \
-    KONG_PLUGIN_SESSION_VER="2.4.1"
+    KONG_PLUGIN_SESSION_VER="2.4.1" \
+    NGX_DISTRIBUTED_SHM_VER="1.0.2"
 
 RUN set -ex \
   && apk --no-cache add \
@@ -23,6 +25,8 @@ RUN set -ex \
     openssl-dev \
   \
 ## Install plugins
+ # Download ngx-distributed-shm dshm library
+    && curl -sL https://raw.githubusercontent.com/grrolland/ngx-distributed-shm/${NGX_DISTRIBUTED_SHM_VER}/lua/dshm.lua > ${LUA_BASE_DIR}/resty/dshm.lua \
  # Remove old lua-resty-session and dependent kong-plugin-session
     && luarocks remove --force kong-plugin-session \
     && luarocks remove --force lua-resty-session \
@@ -34,7 +38,7 @@ RUN set -ex \
         sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
  # Patch nginx_kong.lua for kong-oidc session_secret
-    && TPL=/usr/local/share/lua/5.1/kong/templates/nginx_kong.lua \
+    && TPL=${LUA_BASE_DIR}/kong/templates/nginx_kong.lua \
     # May cause side effects when using another nginx under this kong, unless set to the same value
     && sed -i "/server_name kong;/a\ \n\
 set_decode_base64 \$session_secret \${{X_SESSION_SECRET}};\n" "$TPL" \
@@ -65,6 +69,17 @@ lua_shared_dict \${{X_PROXY_CACHE_STORAGE_NAME}} \${{X_PROXY_CACHE_STORAGE_SIZE}
     set \$session_memcache_maxlockwait \${{X_SESSION_MEMCACHE_MAXLOCKWAIT}};\n\
     set \$session_memcache_pool_timeout \${{X_SESSION_MEMCACHE_POOL_TIMEOUT}};\n\
     set \$session_memcache_pool_size \${{X_SESSION_MEMCACHE_POOL_SIZE}};\n\
+    ## Session: DHSM specific
+    set \$session_dshm_region \${{X_SESSION_DSHM_REGION}};\n\
+    set \$session_dshm_connect_timeout \${{X_SESSION_DSHM_CONNECT_TIMEOUT}};\n\
+    set \$session_dshm_send_timeout \${{X_SESSION_DSHM_SEND_TIMEOUT}};\n\
+    set \$session_dshm_read_timeout \${{X_SESSION_DSHM_READ_TIMEOUT}};\n\
+    set \$session_dshm_host \${{X_SESSION_DSHM_HOST}};\n\
+    set \$session_dshm_port \${{X_SESSION_DSHM_PORT}};\n\
+    set \$session_dshm_pool_name \${{X_SESSION_DSHM_POOL_NAME}};\n\
+    set \$session_dshm_pool_timeout \${{X_SESSION_DSHM_POOL_TIMEOUT}};\n\
+    set \$session_dshm_pool_size \${{X_SESSION_DSHM_POOL_SIZE}};\n\
+    set \$session_dshm_pool_backlog \${{X_SESSION_DSHM_POOL_BACKLOG}};\n\
     ## Session: SHM Specific
     set \$session_shm_store \${{X_SESSION_SHM_STORE}};\n\
     set \$session_shm_uselocking \${{X_SESSION_SHM_USELOCKING}};\n\
@@ -75,7 +90,7 @@ lua_shared_dict \${{X_PROXY_CACHE_STORAGE_NAME}} \${{X_PROXY_CACHE_STORAGE_SIZE}
     set \$session_shm_lock_max_step \${{X_SESSION_SHM_LOCK_MAX_STEP}};\n\
 " "$TPL" \
  # Patch kong_defaults.lua to add custom variables that are replaced dynamically in the template above when kong is started
-    && TPL=/usr/local/share/lua/5.1/kong/templates/kong_defaults.lua \
+    && TPL=${LUA_BASE_DIR}/kong/templates/kong_defaults.lua \
     && sed -i "/\]\]/i\ \n\
 x_proxy_cache_storage_size = 5m\n\
 x_proxy_cache_storage_name = kong_cache\n\
@@ -90,11 +105,22 @@ x_session_memcache_send_timeout = '1000'\n\
 x_session_memcache_read_timeout = '1000'\n\
 x_session_memcache_host = memcached\n\
 x_session_memcache_port = '11211'\n\
-x_session_memcache_uselocking = off\n\
+x_session_memcache_uselocking = 'off'\n\
 x_session_memcache_spinlockwait = '150'\n\
 x_session_memcache_maxlockwait = '30'\n\
-x_session_memcache_pool_timeout = '10'\n\
+x_session_memcache_pool_timeout = '1000'\n\
 x_session_memcache_pool_size = '10'\n\
+\n\
+x_session_dshm_region = oidc_sessions\n\
+x_session_dshm_connect_timeout = '1000'\n\
+x_session_dshm_send_timeout = '1000'\n\
+x_session_dshm_read_timeout = '1000'\n\
+x_session_dshm_host = hazelcast\n\
+x_session_dshm_port = '4321'\n\
+x_session_dshm_pool_name = oidc_sessions\n\
+x_session_dshm_pool_timeout = '1000'\n\
+x_session_dshm_pool_size = '10'\n\
+x_session_dshm_pool_backlog = '10'\n\
 \n\
 x_session_shm_store_size = 5m\n\
 x_session_shm_store = oidc_sessions\n\
