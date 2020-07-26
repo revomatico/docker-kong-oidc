@@ -99,6 +99,8 @@
 
 
 # Release notes
+- 2020-07-26 [2.0.5-4]:
+    - Set default image user to kong
 - 2020-07-03 [2.0.5-3]:
     - Added DSHM (Hazelcast) session storage support using [ngx-distributed-shm](https://github.com/grrolland/ngx-distributed-shm/) dshm.lua library
 - 2020-07-02 [2.0.5-2]:
