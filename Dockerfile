@@ -141,3 +141,5 @@ x_session_shm_lock_max_step = '0.5'\n\
     # Allow regular users to run these programs and bind to ports < 1024
     && setcap 'cap_net_bind_service=+ep' /usr/local/bin/kong \
     && setcap 'cap_net_bind_service=+ep' /usr/local/openresty/nginx/sbin/nginx
+
+USER kong
