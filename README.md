@@ -50,7 +50,6 @@
 ## Session: DSHM (Hazelcast + Vertex)
 
 > This lua-resty-session implementation depends on [grrolland/ngx-distributed-shm](https://github.com/grrolland/ngx-distributed-shm) dshm.lua library.
-> It embeds an older version of Hazelcast (3.11) and is not kubernetes aware. It introduces an additional communication protocol.
 > Recommended: Hazelcast with memcache protocol enabled (see above).
 
 - Reference: https://github.com/bungle/lua-resty-session#dshm-storage-adapter
