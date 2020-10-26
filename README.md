@@ -102,6 +102,7 @@
 # Release notes
 - 2020-10-27 [2.1.4-1]:
     - Bumped Kong to 2.1.4
+    - Bumped lua-resty-oidc 1.7.3-1
 - 2020-07-26 [2.1.0-1]:
     - Bumped Kong to 2.1.0
 - 2020-07-26 [2.0.5-4]:
