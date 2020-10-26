@@ -1,4 +1,4 @@
-FROM kong/kong:2.1.0
+FROM kong/kong:2.1.4
 
 USER root
 
@@ -8,7 +8,7 @@ LABEL maintainer.1="Rami Abusereya <rami.abusereya@revomatico.com>" \
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
     KONG_OIDC_VER="1.2.1-1" \
-    LUA_RESTY_OIDC_VER="1.7.2-1" \
+    LUA_RESTY_OIDC_VER="1.7.3-1" \
     KONG_PLUGIN_SESSION_VER="2.4.1" \
     NGX_DISTRIBUTED_SHM_VER="1.0.2"
 
