@@ -2,25 +2,6 @@
 > Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
 
 
-## Releases
-- Kong v2.1.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
-- Kong v2.1.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.1.0-1/Dockerfile)
-- Kong v2.0.5: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.5-4/Dockerfile)
-- Kong v2.0.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.4-1/Dockerfile)
-- Kong v2.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.3-1/Dockerfile)
-- Kong v2.0.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
-- Kong v1.5.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.5.0-1/Dockerfile)
-- Kong v1.4.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.2-1/Dockerfile)
-- Kong v1.4.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.1-1/Dockerfile)
-- Kong v1.4.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
-- Kong v1.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
-- Kong v1.2.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.2.2-1/Dockerfile)
-- Kong v1.1.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.1.2-1/Dockerfile)
-- Kong v1.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.0.3-1/Dockerfile)
-- Kong v0.14: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
-- Kong v0.13: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
-- Kong v0.12:  [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
-
 ## Session: Cookie
 - This is the default, but not recommended. I would recommend **shm** for a single instance, lightweight deployment.
 - If you have too much information in the session (claims, etc), you may need to [increase the nginx header size](https://github.com/bungle/lua-resty-session#cookie-storage-adapter):
@@ -88,7 +69,7 @@
 - KONG_X_PROXY_CACHE_STORAGE_NAME, default: kong_cache
 - KONG_X_PROXY_CACHE_STORAGE_SIZE, default: 5m (set only if KONG_X_CACHE_PLUGIN_STORAGE_NAME is not kong_cache)
 
-# Notes
+## Notes
 - Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'some_base64_string';`
     - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
     - See: https://github.com/nokia/kong-oidc/issues/1
@@ -99,10 +80,35 @@
 - KONG_X_SESSION_NAME=oidc_session
 
 
-# Release notes
+## Releases
+- Kong v2.2.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.1.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.1.4-1/Dockerfile)
+- Kong v2.1.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.1.0-1/Dockerfile)
+- Kong v2.0.5: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.5-4/Dockerfile)
+- Kong v2.0.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.4-1/Dockerfile)
+- Kong v2.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.3-1/Dockerfile)
+- Kong v2.0.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
+- Kong v1.5.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.5.0-1/Dockerfile)
+- Kong v1.4.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.2-1/Dockerfile)
+- Kong v1.4.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.1-1/Dockerfile)
+- Kong v1.4.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
+- Kong v1.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
+- Kong v1.2.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.2.2-1/Dockerfile)
+- Kong v1.1.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.1.2-1/Dockerfile)
+- Kong v1.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.0.3-1/Dockerfile)
+- Kong v0.14: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
+- Kong v0.13: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
+- Kong v0.12:  [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
+
+
+## Release notes
+- 2020-12-14 [2.2.1-1]:
+    - Bumped Kong to 2.2.1
+    - Bumped lua-resty-oidc to 1.7.4-1
+    - Bumped kong-plugin-session to 2.4.3
 - 2020-10-27 [2.1.4-1]:
     - Bumped Kong to 2.1.4
-    - Bumped lua-resty-oidc 1.7.3-1
+    - Bumped lua-resty-oidc to 1.7.3-1
 - 2020-07-26 [2.1.0-1]:
     - Bumped Kong to 2.1.0
 - 2020-07-26 [2.0.5-4]:
