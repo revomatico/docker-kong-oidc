@@ -7,6 +7,7 @@
 - If you have too much information in the session (claims, etc), you may need to [increase the nginx header size](https://github.com/bungle/lua-resty-session#cookie-storage-adapter):
     - `KONG_NGINX_LARGE_CLIENT_HEADER_BUFFERS='4 16k'`
 
+
 ## Session: Memcached
 
 > Instead of actual memcached, Hazelcast (that is Kubernetes aware), with memcache protocol enabled should be used.
@@ -29,6 +30,7 @@
 - KONG_X_SESSION_MEMCACHE_SEND_TIMEOUT, default 1000 (milliseconds)
 - KONG_X_SESSION_MEMCACHE_READ_TIMEOUT, default 1000 (milliseconds)
 
+
 ## Session: DSHM (Hazelcast + Vertex)
 
 > This lua-resty-session implementation depends on [grrolland/ngx-distributed-shm](https://github.com/grrolland/ngx-distributed-shm) dshm.lua library.
@@ -48,6 +50,7 @@
 - X_SESSION_DSHM_POOL_SIZE, default: 10
 - X_SESSION_DSMM_POOL_BACKLOG, default: 10
 
+
 ## Session: SHM
 
 > Good for single instance. No additional software is required.
@@ -64,10 +67,6 @@
 - KONG_X_SESSION_SHM_LOCK_RATIO, default: 2
 - KONG_X_SESSION_SHM_LOCK_MAX_STEP, default: 0.5
 
-## Proxy cache plugin storage
-- Reference: https://docs.konghq.com/hub/kong-inc/proxy-cache/
-- KONG_X_PROXY_CACHE_STORAGE_NAME, default: kong_cache
-- KONG_X_PROXY_CACHE_STORAGE_SIZE, default: 5m (set only if KONG_X_CACHE_PLUGIN_STORAGE_NAME is not kong_cache)
 
 ## Notes
 - Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'some_base64_string';`
@@ -102,6 +101,9 @@
 
 
 ## Release notes
+- 2021-01-06 [2.2.1-2]:
+    - Removed `x_proxy_cache_storage_name` in favor of built-in `nginx_http_lua_shared_dict`. See: https://github.com/Kong/kong/issues/4643
+    - Bump `kong-plugin-session` to 2.4.4
 - 2020-12-14 [2.2.1-1]:
     - Bumped Kong to 2.2.1
     - Bumped lua-resty-oidc to 1.7.4-1

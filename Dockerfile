@@ -8,7 +8,7 @@ ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
     KONG_OIDC_VER="1.2.1-1" \
     LUA_RESTY_OIDC_VER="1.7.4-1" \
-    KONG_PLUGIN_SESSION_VER="2.4.3" \
+    KONG_PLUGIN_SESSION_VER="2.4.4" \
     NGX_DISTRIBUTED_SHM_VER="1.0.2"
 
 RUN set -ex \
@@ -46,9 +46,6 @@ set_decode_base64 \$session_secret \${{X_SESSION_SECRET}};\n" "$TPL" \
 variables_hash_max_size 2048;\n\
 > if x_session_storage == "shm" then\n\
 lua_shared_dict \${{X_SESSION_SHM_STORE}} \${{X_SESSION_SHM_STORE_SIZE}};\n\
-> end\n\
-> if not \(x_proxy_cache_storage_name == "kong_cache"\) then\n\
-lua_shared_dict \${{X_PROXY_CACHE_STORAGE_NAME}} \${{X_PROXY_CACHE_STORAGE_SIZE}};\n\
 > end\n\
 ' "$TPL" \
  # Patch nginx_kong.lua to add for memcached sessions
@@ -91,9 +88,6 @@ lua_shared_dict \${{X_PROXY_CACHE_STORAGE_NAME}} \${{X_PROXY_CACHE_STORAGE_SIZE}
  # Patch kong_defaults.lua to add custom variables that are replaced dynamically in the template above when kong is started
     && TPL=${LUA_BASE_DIR}/kong/templates/kong_defaults.lua \
     && sed -i "/\]\]/i\ \n\
-x_proxy_cache_storage_size = 5m\n\
-x_proxy_cache_storage_name = kong_cache\n\
-\n\
 x_session_storage = cookie\n\
 x_session_name = oidc_session\n\
 x_session_secret = ''\n\
