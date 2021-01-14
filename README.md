@@ -103,6 +103,10 @@
 ## Release notes
 - XXXX-XX-XX [X.X.X-X]:
     - Added `lua_shared_dict` caching for discovery, jwks and introspection. Default cache size is 128k (small).
+    - Bumped kong-oidc version to X.X.X-X to implement PR [revomatico#2](https://github.com/revomatico/kong-oidc/pull/2)
+    - Compatibility note: Groups/credentials are now injected regardless of `disable_userinfo_header` param
+    - Compatibility note: Param `disable_userinfo_header` is now honored also for introspection
+    - Compatibility note: OIDC authenticated request now clears possible (anonymous) consumer identity and sets X-Credential-Identifier
 - 2021-01-06 [2.2.1-2]:
     - Removed `x_proxy_cache_storage_name` in favor of built-in `nginx_http_lua_shared_dict`. See: https://github.com/Kong/kong/issues/4643
     - Bump `kong-plugin-session` to 2.4.4
