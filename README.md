@@ -101,6 +101,8 @@
 
 
 ## Release notes
+- XXXX-XX-XX [X.X.X-X]:
+    - Added `lua_shared_dict` caching for discovery, jwks and introspection. Default cache size is 128k (small).
 - 2021-01-06 [2.2.1-2]:
     - Removed `x_proxy_cache_storage_name` in favor of built-in `nginx_http_lua_shared_dict`. See: https://github.com/Kong/kong/issues/4643
     - Bump `kong-plugin-session` to 2.4.4

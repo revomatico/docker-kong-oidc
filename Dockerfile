@@ -44,6 +44,9 @@ set_decode_base64 \$session_secret \${{X_SESSION_SECRET}};\n" "$TPL" \
  # Patch nginx_kong.lua to set dictionaries
     && sed -i -E '/^lua_shared_dict kong\s+.+$/i\ \n\
 variables_hash_max_size 2048;\n\
+lua_shared_dict discovery \${{X_OIDC_CACHE_DISCOVERY_SIZE}};\n\
+lua_shared_dict jwks \${{X_OIDC_CACHE_JWKS_SIZE}};\n\
+lua_shared_dict introspection \${{X_OIDC_CACHE_INTROSPECTION_SIZE}};\n\
 > if x_session_storage == "shm" then\n\
 lua_shared_dict \${{X_SESSION_SHM_STORE}} \${{X_SESSION_SHM_STORE_SIZE}};\n\
 > end\n\
@@ -123,6 +126,10 @@ x_session_shm_lock_timeout = '5'\n\
 x_session_shm_lock_step = '0.001'\n\
 x_session_shm_lock_ratio = '2'\n\
 x_session_shm_lock_max_step = '0.5'\n\
+\n\
+x_oidc_cache_discovery_size = 128k\n\
+x_oidc_cache_jwks_size = 128k\n\
+x_oidc_cache_introspection_size = 128k\n\
 \n\
 " "$TPL" \
 ## Cleanup
