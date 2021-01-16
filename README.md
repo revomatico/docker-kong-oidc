@@ -101,9 +101,9 @@
 
 
 ## Release notes
-- XXXX-XX-XX [X.X.X-X]:
+- 2021-01-16 [2.2.1-3]:
     - Added `lua_shared_dict` caching for discovery, jwks and introspection. Default cache size is 128k (small).
-    - Bumped kong-oidc version to X.X.X-X to implement PR [revomatico#2](https://github.com/revomatico/kong-oidc/pull/2)
+    - Bumped kong-oidc version to 1.2.2-2 to implement PR [revomatico#2](https://github.com/revomatico/kong-oidc/pull/2)
     - Compatibility note: Groups/credentials are now injected regardless of `disable_userinfo_header` param
     - Compatibility note: Param `disable_userinfo_header` is now honored also for introspection
     - Compatibility note: OIDC authenticated request now clears possible (anonymous) consumer identity and sets X-Credential-Identifier
