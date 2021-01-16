@@ -103,7 +103,7 @@
 
 ## Release notes
 - 2021-01-16 [2.3.0-1]:
-    - Bump kong 20 2.3.0
+    - Bumped Kong to 2.3.0
 - 2021-01-16 [2.2.1-3]:
     - Added `lua_shared_dict` caching for discovery, jwks and introspection. Default cache size is 128k (small).
     - Bumped kong-oidc version to 1.2.2-2 to implement PR [revomatico#2](https://github.com/revomatico/kong-oidc/pull/2)
