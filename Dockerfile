@@ -1,4 +1,4 @@
-FROM kong:2.2.1-alpine
+FROM kong:2.3.0-alpine
 
 USER root
 
