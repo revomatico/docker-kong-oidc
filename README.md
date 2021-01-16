@@ -80,7 +80,8 @@
 
 
 ## Releases
-- Kong v2.2.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.2.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.2.1-3/Dockerfile)
 - Kong v2.1.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.1.4-1/Dockerfile)
 - Kong v2.1.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.1.0-1/Dockerfile)
 - Kong v2.0.5: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.5-4/Dockerfile)
@@ -101,6 +102,8 @@
 
 
 ## Release notes
+- 2021-01-16 [2.3.0-1]:
+    - Bump kong 20 2.3.0
 - 2021-01-16 [2.2.1-3]:
     - Added `lua_shared_dict` caching for discovery, jwks and introspection. Default cache size is 128k (small).
     - Bumped kong-oidc version to 1.2.2-2 to implement PR [revomatico#2](https://github.com/revomatico/kong-oidc/pull/2)
