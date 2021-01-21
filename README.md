@@ -1,5 +1,5 @@
 # docker-kong-oidc
-> Builds a Docker image from base Kong + nokia/kong-oidc (based on zmartzone/lua-resty-openidc)
+> Builds a [Docker image](https://hub.docker.com/repository/docker/revomatico/docker-kong-oidc/general) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
 
 
 ## Session: Cookie
