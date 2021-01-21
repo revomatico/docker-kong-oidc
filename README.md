@@ -6,6 +6,8 @@
 - This is the default, but not recommended. I would recommend **shm** for a single instance, lightweight deployment.
 - If you have too much information in the session (claims, etc), you may need to [increase the nginx header size](https://github.com/bungle/lua-resty-session#cookie-storage-adapter):
     - `KONG_NGINX_LARGE_CLIENT_HEADER_BUFFERS='4 16k'`
+- You can also enable [session compression](https://github.com/bungle/lua-resty-session#pluggable-compressors) to reduce cookie size:
+    - `KONG_X_SESSION_COMPRESSOR=zlib`
 
 
 ## Session: Memcached
@@ -102,6 +104,8 @@
 
 
 ## Release notes
+- XXXX-XX-XX [X.X.X-X]:
+    - Added session compression configuration using `KONG_X_SESSION_COMPRESSOR`
 - 2021-01-16 [2.3.0-1]:
     - Bumped Kong to 2.3.0
 - 2021-01-16 [2.2.1-3]:
