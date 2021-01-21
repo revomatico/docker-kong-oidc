@@ -104,7 +104,7 @@
 
 
 ## Release notes
-- XXXX-XX-XX [X.X.X-X]:
+- 2021-01-21 [2.3.0-2]:
     - Added session compression configuration using `KONG_X_SESSION_COMPRESSOR`
 - 2021-01-16 [2.3.0-1]:
     - Bumped Kong to 2.3.0
