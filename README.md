@@ -104,7 +104,7 @@
 
 
 ## Release notes
-- 2021-02-17 [2.4.0-1]:
+- 2021-02-17 [2.3.0-3]:
     - Bumped kong-oidc version to 1.2.3-1 to implement PR [revomatico#3](https://github.com/revomatico/kong-oidc/pull/3) and [revomatico#4](https://github.com/revomatico/kong-oidc/pull/4)
 - 2021-01-21 [2.3.0-2]:
     - Added session compression configuration using `KONG_X_SESSION_COMPRESSOR`
