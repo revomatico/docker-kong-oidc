@@ -6,7 +6,7 @@ LABEL authors="Rami Abusereya <rami.abusereya@revomatico.com>,Cristian Chiru <cr
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
-    KONG_OIDC_VER="1.2.2-1" \
+    KONG_OIDC_VER="1.2.3-1" \
     LUA_RESTY_OIDC_VER="1.7.4-1" \
     KONG_PLUGIN_SESSION_VER="2.4.4" \
     NGX_DISTRIBUTED_SHM_VER="1.0.2"
