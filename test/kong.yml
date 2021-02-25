@@ -1,0 +1,23 @@
+_format_version: "1.1"
+
+services:
+- name: test-service
+  host: headers.cloxy.net
+  path: /
+  port: 443
+  protocol: https
+  tags:
+  - test
+  routes:
+  - name: test-route
+    hosts:
+    - localhost
+    paths:
+    - /
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    strip_path: false
+    tags:
+    - test
