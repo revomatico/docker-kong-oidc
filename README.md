@@ -105,8 +105,9 @@
 
 
 ## Release notes
-- XXXX-XX-XX [X.X.X-X]:
+- 2021-02-25 [2.3.2-2]:
     - Do not add NET_BIND_SERVICE capability to make it easier to deploy the image in environments with security constraints
+    - Improved test script
 - 2021-02-17 [2.3.2-1]:
     - Bumped kong to 2.3.2
 - 2021-02-17 [2.3.0-3]:
