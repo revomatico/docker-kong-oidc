@@ -1,6 +1,8 @@
 # docker-kong-oidc
 > Builds a [Docker image](https://hub.docker.com/r/revomatico/docker-kong-oidc) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
 
+> Note on overriding numeric values like ports via env vars: due to a limitation in the lua templating engine in openresty, they must be quoted twice: KONG_X_VAR="'1234'".
+
 
 ## Session: Cookie
 - This is the default, but not recommended. I would recommend **shm** for a single instance, lightweight deployment.
@@ -22,7 +24,7 @@
     - Set `KONG_X_SESSION_MEMCACHE_HOST=mynewhost`
     - Alternatively, set up DNS entry for **memcached** to be resolved from within the container
 - Memcached port is by default **11211**, override by setting:
-    - `KONG_X_SESSION_MEMCACHE_PORT=12345`
+    - `KONG_X_SESSION_MEMCACHE_PORT="'12345'"`
 - KONG_X_SESSION_MEMCACHE_USELOCKING, default: off
 - KONG_X_SESSION_MEMCACHE_SPINLOCKWAIT, default: 150
 - KONG_X_SESSION_MEMCACHE_MAXLOCKWAIT, default: 30
@@ -82,7 +84,8 @@
 
 
 ## Releases
-- Kong v2.3.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.3.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.3.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.3.2-2/Dockerfile)
 - Kong v2.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.3.0-3/Dockerfile)
 - Kong v2.2.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.2.1-3/Dockerfile)
 - Kong v2.1.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.1.4-1/Dockerfile)
@@ -105,6 +108,8 @@
 
 
 ## Release notes
+- 2021-03-10 [2.3.3-1]:
+    - Bumped kong to 2.3.3
 - 2021-02-25 [2.3.2-2]:
     - Do not add NET_BIND_SERVICE capability to make it easier to deploy the image in environments with security constraints
     - Improved test script

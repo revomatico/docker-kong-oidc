@@ -5,7 +5,7 @@ cd `readlink -f $0 | grep -o '.*/'`
 . common.sh
 
 ./run.sh /usr/local/bin/kong start -v -p /usr/local/kong/ | xargs printf "Created container: %s\n"
-sleep 3
+sleep 5
 RESP=`curl -sS localhost:$KONG_LOCAL_HTTP_PORT/request.php`
 RET=$?
 ## Cleanup
