@@ -29,6 +29,9 @@ RUN set -ex \
  # Remove old lua-resty-session and dependent kong-plugin-session
     && luarocks remove --force kong-plugin-session \
     && luarocks remove --force lua-resty-session \
+ # Add Pluggable Compressors dependencies
+    && luarocks install lua-ffi-zlib \
+    && luarocks install penlight \
  # Build kong-plugin-session
     && curl -sL https://raw.githubusercontent.com/Kong/kong-plugin-session/${KONG_PLUGIN_SESSION_VER}/kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec | tee kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec \
     && luarocks build kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec \

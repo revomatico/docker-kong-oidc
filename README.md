@@ -108,6 +108,8 @@
 
 
 ## Release notes
+- 2021-03-16 [2.3.3-2]:
+    - Add [pluggable compressor zlib](https://github.com/bungle/lua-resty-session#pluggable-compressors) dependencies #17
 - 2021-03-10 [2.3.3-1]:
     - Bumped kong to 2.3.3
 - 2021-02-25 [2.3.2-2]:

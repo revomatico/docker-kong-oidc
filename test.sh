@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### This is not a real test. Just a quick check that kong starts just fine with some parameters.
+
 cd `readlink -f $0 | grep -o '.*/'`
 
 . common.sh

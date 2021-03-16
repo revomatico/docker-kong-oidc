@@ -27,6 +27,7 @@ docker run -d --rm -it \
     -e KONG_STATUS_LISTEN='0.0.0.0:8100' \
     -e KONG_NGINX_DAEMON='off' \
     -e KONG_X_SESSION_MEMCACHE_PORT="'1234'" \
+    -e KONG_X_SESSION_COMPRESSOR=zlib \
     -v $PWD/test:/kong_dbless \
     -p $KONG_LOCAL_HTTP_PORT:8000 \
     -p $KONG_LOCAL_HTTPS_PORT:8443 \
