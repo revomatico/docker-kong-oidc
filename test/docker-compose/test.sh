@@ -13,7 +13,7 @@ set -x
 
 export KONG_DOCKER_TAG=$DOCKER_IMAGE
 
-docker-compose up --force-recreate -d
+docker-compose up -d
 
 sleep ${1:-10}
 
@@ -28,9 +28,4 @@ docker-compose rm -f
 docker volume rm docker-compose_kong_data
 
 { set +x; } 2>/dev/null
-if [[ -n "$RET" ]]; then
-    echo "[SUCCESS] Kong with database is up!"
-else
-    echo "[FAILED] Kong cannot reach the database or did not start"
-    exit 1
-fi
+[[ -n "$RET" ]] && echo "[SUCCESS] Kong with database is up!" || exit_failed
