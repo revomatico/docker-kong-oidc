@@ -1,4 +1,4 @@
-FROM kong:2.3.3-alpine
+FROM kong/kong:2.4.0
 
 USER root
 
@@ -8,7 +8,7 @@ ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
     KONG_OIDC_VER="1.2.3-1" \
     LUA_RESTY_OIDC_VER="1.7.4-1" \
-    KONG_PLUGIN_SESSION_VER="2.4.4" \
+    KONG_PLUGIN_SESSION_VER="2.4.5" \
     NGX_DISTRIBUTED_SHM_VER="1.0.2"
 
 RUN set -ex \

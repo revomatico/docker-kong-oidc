@@ -84,30 +84,35 @@
 
 
 ## Releases
-- Kong v2.3.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/master/Dockerfile)
-- Kong v2.3.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.3.2-2/Dockerfile)
-- Kong v2.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.3.0-3/Dockerfile)
-- Kong v2.2.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.2.1-3/Dockerfile)
-- Kong v2.1.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.1.4-1/Dockerfile)
-- Kong v2.1.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.1.0-1/Dockerfile)
-- Kong v2.0.5: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.5-4/Dockerfile)
-- Kong v2.0.4: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.4-1/Dockerfile)
-- Kong v2.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.3-1/Dockerfile)
-- Kong v2.0.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
-- Kong v1.5.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.5.0-1/Dockerfile)
-- Kong v1.4.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.2-1/Dockerfile)
-- Kong v1.4.1: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.1-1/Dockerfile)
-- Kong v1.4.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
-- Kong v1.3.0: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
-- Kong v1.2.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.2.2-1/Dockerfile)
-- Kong v1.1.2: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.1.2-1/Dockerfile)
-- Kong v1.0.3: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/1.0.3-1/Dockerfile)
-- Kong v0.14: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
-- Kong v0.13: [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
-- Kong v0.12:  [Dockerfile](https://github.com/Revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
+- Kong v2.4.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.3.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.3.3-2/Dockerfile)
+- Kong v2.3.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.3.2-2/Dockerfile)
+- Kong v2.3.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.3.0-3/Dockerfile)
+- Kong v2.2.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.2.1-3/Dockerfile)
+- Kong v2.1.4: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.1.4-1/Dockerfile)
+- Kong v2.1.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.1.0-1/Dockerfile)
+- Kong v2.0.5: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.5-4/Dockerfile)
+- Kong v2.0.4: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.4-1/Dockerfile)
+- Kong v2.0.3: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.3-1/Dockerfile)
+- Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
+- Kong v1.5.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.5.0-1/Dockerfile)
+- Kong v1.4.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.4.2-1/Dockerfile)
+- Kong v1.4.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.4.1-1/Dockerfile)
+- Kong v1.4.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
+- Kong v1.3.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
+- Kong v1.2.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.2.2-1/Dockerfile)
+- Kong v1.1.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.1.2-1/Dockerfile)
+- Kong v1.0.3: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.0.3-1/Dockerfile)
+- Kong v0.14: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
+- Kong v0.13: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
+- Kong v0.12:  [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
 
 
 ## Release notes
+- 2021-04-14 [2.4.0-1]:
+    - Bump kong to 2.4.0
+    - Changed base docker image to kong/kong
+    - Bump [kong-plugin-session](https://github.com/Kong/kong-plugin-session) to 2.4.5
 - 2021-04-12 [2.3.3-3]:
     - Add poor man [test using docker-compose and postgres database](test/docker-compose)
 - 2021-03-16 [2.3.3-2]:
@@ -162,7 +167,7 @@
     - Bumped Kong version to 2.0.2, using alpine image instead of centos
 - 2020-02-21 [1.5.0-1]:
     - Bumped Kong version to 1.5.0, the last 1.x version
-    - Using [Revomatico/kong-oidc](https://github.com/Revomatico/kong-oidc) repo
+    - Using [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) repo
 - 2019-11-19 [1.4.2-1]:
     - Bumped Kong version to 1.4.2
     - Added proxy cache plugin custom dictionary
@@ -193,14 +198,14 @@
     - Bump to Kong 1.2.0-centos image
 - 2019-04-27 [1.1.2-1]:
     - Used Kong 1.1.2-centos image
-    - Changed kong-oidc plugin repo from Nokia to [Revomatico](https://github.com/Revomatico/kong-oidc) for various improvements and compatibility with lua-resty-openidc 1.7
+    - Changed kong-oidc plugin repo from Nokia to [revomatico](https://github.com/revomatico/kong-oidc) for various improvements and compatibility with lua-resty-openidc 1.7
 - 2019-04-02 [1.1.1-1]:
     - Using Kong 1.1.1-centos image
 - 2019-02-22 [1.0.3-1]:
     - Kept creation of `/usr/local/kong` in Dockerfile
     - Removed Dockerfile's `USER` directive is incompatible with su-exec. See https://github.com/ncopa/su-exec/issues/2#issuecomment-336670196
 - 2019-02-21 [1.0.3]:
-    - Replaced **Revomatico/kong-http-to-https-redirect** with [dsteinkopf/kong-http-to-https-redirect](https://github.com/dsteinkopf/kong-http-to-https-redirect) as it has more fixes and improvements
+    - Replaced **revomatico/kong-http-to-https-redirect** with [dsteinkopf/kong-http-to-https-redirect](https://github.com/dsteinkopf/kong-http-to-https-redirect) as it has more fixes and improvements
     - Upgraded rockspec [zmartzone/lua-resty-openidc](https://github.com/zmartzone/lua-resty-openidc) to 1.7.1-1
     - Using Kong 1.0.3 image
     - Added new environment variables to configure memcached
@@ -212,7 +217,7 @@
 - 2018-10-09 [0.14-1]:
     - Upgraded to Kong 0.14
 - 2018-10-09 [0.13-3]:
-    - Changed repo for kong-http-to-https-redirect to [Revomatico/kong-http-to-https-redirect](https://github.com/Revomatico/kong-http-to-https-redirect)
+    - Changed repo for kong-http-to-https-redirect to [revomatico/kong-http-to-https-redirect](https://github.com/revomatico/kong-http-to-https-redirect)
 - 2018-08-10 [0.13-2]:
     - Forced a rebuild to update rockspec [HappyValleyIO/kong-http-to-https-redirect](https://github.com/HappyValleyIO/kong-http-to-https-redirect)
 - 2018-07-07 [0.13-1]:
