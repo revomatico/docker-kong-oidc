@@ -111,6 +111,8 @@
 
 
 ## Release notes
+- 2021-07-14 [2.5.0-2]:
+    - Bumped kong-oidc version to 1.2.3-2 to implement https://github.com/revomatico/kong-oidc/pull/8
 - 2021-07-14 [2.5.0-1]:
     - Bump kong to 2.5.0
 - 2021-05-13 [2.4.1-1]:
