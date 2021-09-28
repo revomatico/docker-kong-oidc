@@ -1,4 +1,4 @@
-FROM kong/kong:2.5.1
+FROM kong/kong:2.6.0
 
 USER root
 
@@ -8,7 +8,6 @@ ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
     KONG_OIDC_VER="1.2.3-2" \
     LUA_RESTY_OIDC_VER="1.7.4-1" \
-    KONG_PLUGIN_SESSION_VER="2.4.5" \
     NGX_DISTRIBUTED_SHM_VER="1.0.2"
 
 RUN set -ex \
@@ -26,15 +25,11 @@ RUN set -ex \
 ## Install plugins
  # Download ngx-distributed-shm dshm library
     && curl -sL https://raw.githubusercontent.com/grrolland/ngx-distributed-shm/${NGX_DISTRIBUTED_SHM_VER}/lua/dshm.lua > ${LUA_BASE_DIR}/resty/dshm.lua \
- # Remove old lua-resty-session and dependent kong-plugin-session
-    && luarocks remove --force kong-plugin-session \
+ # Remove old lua-resty-session
     && luarocks remove --force lua-resty-session \
  # Add Pluggable Compressors dependencies
     && luarocks install lua-ffi-zlib \
     && luarocks install penlight \
- # Build kong-plugin-session
-    && curl -sL https://raw.githubusercontent.com/Kong/kong-plugin-session/${KONG_PLUGIN_SESSION_VER}/kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec | tee kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec \
-    && luarocks build kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec \
  # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
     && curl -sL https://raw.githubusercontent.com/revomatico/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec | \
         sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_OIDC_VER}.rockspec \

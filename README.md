@@ -84,7 +84,8 @@
 
 
 ## Releases
-- Kong v2.5.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.6.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.5.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.5.1-1/Dockerfile)
 - Kong v2.5.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.5.0-2/Dockerfile)
 - Kong v2.4.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.4.1-1/Dockerfile)
 - Kong v2.4.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.4.0-1/Dockerfile)
@@ -112,6 +113,9 @@
 
 
 ## Release notes
+- 2021-09-28 [2.6.0-1]:
+    - Bump kong to 2.6.0
+    - No more removing of kong-plugin-session, as this is [moved in tree of kong repo](https://github.com/Kong/kong/blob/master/CHANGELOG.md#260)
 - 2021-09-08 [2.5.1-1]:
     - Bump kong to 2.5.1
 - 2021-07-14 [2.5.0-2]:
