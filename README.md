@@ -112,6 +112,8 @@
 
 
 ## Release notes
+- 2021-10-20 [2.5.1-2]:
+    - Change reference to master branch for kong-oidc plugin
 - 2021-09-08 [2.5.1-1]:
     - Bump kong to 2.5.1
 - 2021-07-14 [2.5.0-2]:

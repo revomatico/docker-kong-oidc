@@ -36,7 +36,7 @@ RUN set -ex \
     && curl -sL https://raw.githubusercontent.com/Kong/kong-plugin-session/${KONG_PLUGIN_SESSION_VER}/kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec | tee kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec \
     && luarocks build kong-plugin-session-${KONG_PLUGIN_SESSION_VER}-1.rockspec \
  # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
-    && curl -sL https://raw.githubusercontent.com/revomatico/kong-oidc/master/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec | \
+    && curl -sL https://raw.githubusercontent.com/revomatico/kong-oidc/v${KONG_OIDC_VER}/kong-oidc-${KONG_OIDC_VER}.rockspec | tee kong-oidc-${KONG_OIDC_VER}.rockspec | \
         sed -E -e 's/(tag =)[^,]+/\1 "master"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_OIDC_VER}.rockspec \
  # Patch nginx_kong.lua for kong-oidc session_secret
