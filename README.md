@@ -113,6 +113,8 @@
 
 
 ## Release notes
+- 2021-10-20 [2.6.0-2]:
+    - Fix kong-oidc plugin rockspec [referral to just master](https://github.com/revomatico/docker-kong-oidc/issues/23), breaking older Dockerfile builds.
 - 2021-09-28 [2.6.0-1]:
     - Bump kong to 2.6.0
     - No more removing of kong-plugin-session, as this is [moved in tree of kong repo](https://github.com/Kong/kong/blob/master/CHANGELOG.md#260)
