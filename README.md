@@ -112,6 +112,8 @@
 
 ## Release notes
 
+- 2022-01-07 [2.7.0-2]:
+  - Change to [kong-plugin-cookies-to-headers](https://github.com/revomatico/kong-plugin-cookies-to-headers)
 - 2022-01-07 [2.7.0-1]:
   - Bump kong to 2.6.0
   - Bump lua-resty-oidc to 1.7.5-1
