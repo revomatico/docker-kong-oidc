@@ -112,6 +112,9 @@
 
 ## Release notes
 
+- 2022-01-25 [2.7.0-3]:
+  - Bump kong-oidc plugin to 1.2.4-1
+  - Bump revomatico/kong-plugin-cookies-to-headers to 1.1-1
 - 2022-01-07 [2.7.0-2]:
   - Change to [kong-plugin-cookies-to-headers](https://github.com/revomatico/kong-plugin-cookies-to-headers)
 - 2022-01-07 [2.7.0-1]:
