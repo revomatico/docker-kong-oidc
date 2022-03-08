@@ -114,7 +114,7 @@
 
 ## Release notes
 
-- 2022-XX-XX [X.X.X-X]
+- 2022-03-08 [2.8.0-2]
   - Use kong official release image as base image
 - 2022-03-03 [2.8.0-1]:
   - Bump kong to 2.8.0
