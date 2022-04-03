@@ -114,7 +114,9 @@
 
 ## Release notes
 
-- 2022-03-08 [2.8.0-3]
+- 2022-04-03 [2.8.0-4]
+  - Bump kong-oidc plugin to 1.2.4-4, thank you @ruiengana!
+- 2022-04-01 [2.8.0-3]
   - Bump kong-oidc plugin to 1.2.4-3, thank you @ruiengana!
   - Bump [ngx-distributed-shm](https://github.com/grrolland/ngx-distributed-shm) to 1.0.7
 - 2022-03-08 [2.8.0-2]
