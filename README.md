@@ -82,7 +82,8 @@
 
 ## Releases
 
-- Kong v2.8.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.0.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v2.8.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.8.1-1/Dockerfile)
 - Kong v2.8.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.8.0-4/Dockerfile)
 - Kong v2.7.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.7.1-1/Dockerfile)
 - Kong v2.7.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.7.0-3/Dockerfile)
@@ -101,20 +102,11 @@
 - Kong v2.0.4: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.4-1/Dockerfile)
 - Kong v2.0.3: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.3-1/Dockerfile)
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
-- Kong v1.5.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.5.0-1/Dockerfile)
-- Kong v1.4.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.4.2-1/Dockerfile)
-- Kong v1.4.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.4.1-1/Dockerfile)
-- Kong v1.4.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.4.0-1/Dockerfile)
-- Kong v1.3.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.3.0-2/Dockerfile)
-- Kong v1.2.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.2.2-1/Dockerfile)
-- Kong v1.1.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.1.2-1/Dockerfile)
-- Kong v1.0.3: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/1.0.3-1/Dockerfile)
-- Kong v0.14: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/0.14-2/Dockerfile)
-- Kong v0.13: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/0.13-3/Dockerfile)
-- Kong v0.12:  [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/0.12/Dockerfile)
 
 ## Release notes
 
+- 2022-09-08 [3.0.0-1]
+  - Bump kong to 3.0.0
 - 2022-04-06 [2.8.1-1]
   - Bump kong to 2.8.1
 - 2022-04-03 [2.8.0-4]

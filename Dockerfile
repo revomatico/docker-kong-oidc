@@ -1,8 +1,8 @@
-FROM kong:2.8.1-alpine
+FROM kong:3.0.0-alpine
 
 USER root
 
-LABEL authors="Rami Abusereya <rami.abusereya@revomatico.com>,Cristian Chiru <cristian.chiru@revomatico.com>"
+LABEL authors="Cristian Chiru <cristian.chiru@revomatico.com>"
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
