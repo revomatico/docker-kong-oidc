@@ -105,6 +105,8 @@
 
 ## Release notes
 
+- 2022-09-08 [3.0.0-3]
+  - Fix patching luarocks file
 - 2022-09-08 [3.0.0-2]
   - Bump kong-oidc plugin to 1.2.5-1
 - 2022-09-08 [3.0.0-1]

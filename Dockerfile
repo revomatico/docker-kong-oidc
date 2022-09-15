@@ -28,7 +28,7 @@ RUN set -ex \
     && luarocks install penlight \
     # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
     && curl -sL https://raw.githubusercontent.com/revomatico/kong-oidc/v${KONG_PLUGIN_OIDC_VER}/kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec | tee kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec | \
-    sed -E -e 's/(tag =)[^,]+/\1 "v${KONG_PLUGIN_OIDC_VER}"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec \
+    sed -E -e 's/(tag =)[^,]+/\1 "'v${KONG_PLUGIN_OIDC_VER}'"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec \
     # Build kong-plugin-cookies-to-headers
     && curl -sL https://raw.githubusercontent.com/revomatico/kong-plugin-cookies-to-headers/master/kong-plugin-cookies-to-headers-${KONG_PLUGIN_COOKIES_TO_HEADERS_VER}.rockspec > kong-plugin-cookies-to-headers-${KONG_PLUGIN_COOKIES_TO_HEADERS_VER}.rockspec \
