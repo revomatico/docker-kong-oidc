@@ -75,10 +75,9 @@
   - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
   - See: <https://github.com/nokia/kong-oidc/issues/1>
 - To enable the plugins, set the env variable for the container with comma separated plugin values:
-  - [Kong < 0.14] `KONG_CUSTOM_PLUGINS=oidc`
-  - [Kong >= 0.14] `KONG_PLUGINS=bundled,oidc`
+  - `KONG_PLUGINS=bundled,oidc`
 - A common default session_secret should be defined by setting env KONG_X_SESSION_SECRET
-- KONG_X_SESSION_NAME=oidc_session
+- `KONG_X_SESSION_NAME=oidc_session`
 
 ## Releases
 
@@ -104,7 +103,9 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
-
+- 2022-09-17 [3.0.0-4]
+  - Using kong-oidc plugin 1.3.0-1 that was fixed to work with Kong 3
+  - Fixed build and basic test
 - 2022-09-08 [3.0.0-3]
   - Fix patching luarocks file
 - 2022-09-08 [3.0.0-2]

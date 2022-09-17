@@ -6,7 +6,7 @@ LABEL authors="Cristian Chiru <cristian.chiru@revomatico.com>"
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
-    KONG_PLUGIN_OIDC_VER="1.2.5-1" \
+    KONG_PLUGIN_OIDC_VER="1.3.0-1" \
     KONG_PLUGIN_COOKIES_TO_HEADERS_VER="1.1-1" \
     LUA_RESTY_OIDC_VER="1.7.5-1" \
     NGX_DISTRIBUTED_SHM_VER="1.0.7"
@@ -27,8 +27,9 @@ RUN set -ex \
     && luarocks install lua-ffi-zlib \
     && luarocks install penlight \
     # Build kong-oidc from forked repo because is not keeping up with lua-resty-openidc
-    && curl -sL https://raw.githubusercontent.com/revomatico/kong-oidc/v${KONG_PLUGIN_OIDC_VER}/kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec | tee kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec | \
-    sed -E -e 's/(tag =)[^,]+/\1 "'v${KONG_PLUGIN_OIDC_VER}'"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" > kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec \
+    && curl -sL https://raw.githubusercontent.com/revomatico/kong-oidc/v${KONG_PLUGIN_OIDC_VER}/kong-oidc.rockspec | \
+        sed -E -e 's/(tag =)[^,]+/\1 "'v${KONG_PLUGIN_OIDC_VER}'"/' -e "s/(lua-resty-openidc ~>)[^\"]+/\1 ${LUA_RESTY_OIDC_VER}/" | \
+        tee kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec \
     && luarocks build kong-oidc-${KONG_PLUGIN_OIDC_VER}.rockspec \
     # Build kong-plugin-cookies-to-headers
     && curl -sL https://raw.githubusercontent.com/revomatico/kong-plugin-cookies-to-headers/master/kong-plugin-cookies-to-headers-${KONG_PLUGIN_COOKIES_TO_HEADERS_VER}.rockspec > kong-plugin-cookies-to-headers-${KONG_PLUGIN_COOKIES_TO_HEADERS_VER}.rockspec \

@@ -3,7 +3,7 @@
 cd `readlink -f $0 | grep -o '.*/'`
 . common.sh
 
-docker run -d --rm -it \
+docker run -d -it \
     --name $DOCKER_CONTAINER \
     -e KONG_LOG_LEVEL=info \
     -e KONG_ADMIN_ACCESS_LOG=/dev/stdout \
