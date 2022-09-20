@@ -103,6 +103,8 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
+- 2022-09-20 [3.0.0-6]
+  - Bump kong-oidc plugin 1.3.0-3
 - 2022-09-20 [3.0.0-5]
   - Using kong-oidc plugin 1.3.0-2 that was fixed to work with Kong 3
 - 2022-09-17 [3.0.0-4]
