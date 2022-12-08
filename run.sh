@@ -3,6 +3,7 @@
 cd `readlink -f $0 | grep -o '.*/'`
 . common.sh
 
+set -x
 docker run -d -it \
     --name $DOCKER_CONTAINER \
     --hostname $DOCKER_CONTAINER \
