@@ -5,6 +5,7 @@ cd `readlink -f $0 | grep -o '.*/'`
 
 docker run -d -it \
     --name $DOCKER_CONTAINER \
+    --hostname $DOCKER_CONTAINER \
     -e KONG_LOG_LEVEL=info \
     -e KONG_ADMIN_ACCESS_LOG=/dev/stdout \
     -e KONG_ADMIN_ERROR_LOG=/dev/stderr \
@@ -29,6 +30,7 @@ docker run -d -it \
     -e KONG_X_SESSION_MEMCACHE_PORT="'1234'" \
     -e KONG_X_SESSION_COMPRESSOR=zlib \
     -v $PWD/test:/kong_dbless \
+    -p 8001:8001 \
     -p $KONG_LOCAL_HTTP_PORT:8000 \
     -p $KONG_LOCAL_HTTPS_PORT:8443 \
     $DOCKER_IMAGE \

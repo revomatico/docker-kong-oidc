@@ -12,9 +12,18 @@ cleanup() {
 
 trap cleanup EXIT
 
-./run.sh /usr/local/bin/kong start -v -p /usr/local/kong/ | xargs printf "Created container: %s\n"
+./run.sh | xargs printf "Created container: %s\n"
 sleep 5
-RESP=`curl -sS localhost:$KONG_LOCAL_HTTP_PORT/request.php`
+if [[ -x $(which jq) ]]; then
+    set -x
+    curl -sSL localhost:8001 | jq '{version,hostname,node_id}'
+else
+    set -x
+    curl -sSL localhost:8001 | head -2 | tail -1
+fi
+{ set +x; } 2>/dev/null
+
+RESP=$(set -x; curl -sS localhost:$KONG_LOCAL_HTTP_PORT/request.php)
 RET=$?
 ## Cleanup
 if [[ $RET -eq 0 ]]; then
