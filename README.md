@@ -81,7 +81,8 @@
 
 ## Releases
 
-- Kong v3.1.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.1.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.1.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.1.0-1/Dockerfile)
 - Kong v3.0.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.0.1-1/Dockerfile)
 - Kong v3.0.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.0.0-6/Dockerfile)
 - Kong v2.8.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.8.1-1/Dockerfile)
@@ -105,6 +106,8 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
+- 2023-02-24 [3.1.1-1]
+  - Bump kong to 3.1.1
 - 2022-12-07 [3.1.0-1]
   - Bump kong to 3.1.0
 - 2022-12-06 [3.0.1-1]
