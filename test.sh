@@ -13,13 +13,13 @@ cleanup() {
 trap cleanup EXIT
 
 ./run.sh | xargs printf "Created container: %s\n"
-sleep 5
+sleep 10
 if [[ -x $(which jq) ]]; then
     set -x
-    curl -sSL localhost:8001 | jq '{version,hostname,node_id}'
+    curl -sSL localhost:$KONG_LOCAL_ADMIN_PORT | jq '{version,hostname,node_id}'
 else
     set -x
-    curl -sSL localhost:8001 | head -2 | tail -1
+    curl -sSL localhost:$KONG_LOCAL_ADMIN_PORT | head -2 | tail -1
 fi
 { set +x; } 2>/dev/null
 

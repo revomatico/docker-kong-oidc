@@ -23,7 +23,6 @@ docker run -d -it \
     -e KONG_LUA_PACKAGE_PATH='/opt/?.lua;/opt/?/init.lua;;' \
     -e KONG_NGINX_WORKER_PROCESSES='1' \
     -e KONG_PLUGINS='bundled,oidc' \
-    -e KONG_PORT_MAPS="$KONG_LOCAL_HTTP_PORT:8000, $KONG_LOCAL_HTTPS_PORT:8443" \
     -e KONG_ADMIN_LISTEN='0.0.0.0:8001' \
     -e KONG_PROXY_LISTEN='0.0.0.0:8000, 0.0.0.0:8443 http2 ssl' \
     -e KONG_STATUS_LISTEN='0.0.0.0:8100' \
@@ -31,7 +30,7 @@ docker run -d -it \
     -e KONG_X_SESSION_MEMCACHE_PORT="'1234'" \
     -e KONG_X_SESSION_COMPRESSOR=zlib \
     -v $PWD/test:/kong_dbless \
-    -p 8001:8001 \
+    -p $KONG_LOCAL_ADMIN_PORT:8001 \
     -p $KONG_LOCAL_HTTP_PORT:8000 \
     -p $KONG_LOCAL_HTTPS_PORT:8443 \
     $DOCKER_IMAGE \
