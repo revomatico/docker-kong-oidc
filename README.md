@@ -108,7 +108,7 @@
 
 ## Release notes
 - 2023-03-01 [3.2.1-1]
-  - Bump kong to 3.2.1
+  - Bump kong to 3.2.1. Temporary change in base image as 3.2.0 is not yet released in the official image.
 - 2023-02-24 [3.1.1-1]
   - Bump kong to 3.1.1
 - 2022-12-07 [3.1.0-1]
