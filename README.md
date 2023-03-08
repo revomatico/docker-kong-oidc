@@ -107,8 +107,10 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
+- 2023-03-08 [3.2.1-2]
+  - Bump [kong-plugin-cookies-to-headers](https://github.com/revomatico/kong-plugin-cookies-to-headers) plugin to 1.2.0-1
 - 2023-03-01 [3.2.1-1]
-  - Bump kong to 3.2.1. Temporary change in base image as 3.2.0 is not yet released in the official image.
+  - Bump kong to 3.2.1. Change in base image as 3.2.0 is not yet released in the official image.
 - 2023-02-24 [3.1.1-1]
   - Bump kong to 3.1.1
 - 2022-12-07 [3.1.0-1]
