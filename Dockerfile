@@ -1,4 +1,4 @@
-FROM kong/kong-gateway:3.2.1.0-alpine
+FROM kong/kong:3.2.2-alpine
 
 USER root
 

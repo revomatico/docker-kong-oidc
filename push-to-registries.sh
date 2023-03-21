@@ -15,7 +15,7 @@ done
 DH_USERNAME="${1:-$DH_USERNAME}"
 DH_PASSWORD="${2:-$DH_PASSWORD}"
 [[ -n "$DH_PASSWORD" ]] || read -p "Docker Hub Password for $DH_USERNAME: " -s DH_PASSWORD
-DH_REPO="revomatico/${DOCKER_IMAGE##*/}"
+DH_REPO="$DH_USERNAME/${DOCKER_IMAGE##*/}"
 
 ## Push image to Docker Hub
 docker login -u $DH_USERNAME --password-stdin <<< "$DH_PASSWORD"

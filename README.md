@@ -1,6 +1,8 @@
 # docker-kong-oidc
 
-> Builds a [Docker image](https://hub.docker.com/r/revomatico/docker-kong-oidc) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
+> Builds a [Docker image](https://hub.docker.com/r/cristianchiru/docker-kong-oidc) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
+
+> !! Docker repository moved from organization to personal because free organization repos are no longer free.
 
 > Note on overriding numeric values like ports via env vars: due to a limitation in the lua templating engine in openresty, they must be quoted twice: KONG_X_VAR="'1234'".
 
@@ -81,7 +83,8 @@
 
 ## Releases
 
-- Kong v3.2.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.2.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.2.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.2.1-2/Dockerfile)
 - Kong v3.1.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.1.1-1/Dockerfile)
 - Kong v3.1.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.1.0-1/Dockerfile)
 - Kong v3.0.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.0.1-1/Dockerfile)
@@ -107,6 +110,8 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
+- 2023-03-21 [3.2.2-1]
+  - Bump kong to 3.2.2. Went back to the official kong image.
 - 2023-03-08 [3.2.1-2]
   - Bump [kong-plugin-cookies-to-headers](https://github.com/revomatico/kong-plugin-cookies-to-headers) plugin to 1.2.0-1
 - 2023-03-01 [3.2.1-1]
