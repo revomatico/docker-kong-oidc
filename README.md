@@ -2,7 +2,7 @@
 
 > Builds a [Docker image](https://hub.docker.com/r/cristianchiru/docker-kong-oidc) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
 
-> !! Docker repository moved from organization to personal because free organization repos are no longer free.
+> !! Starting with [3.2.2-1](https://github.com/revomatico/docker-kong-oidc/releases/tag/3.2.2-1) Docker repository moved from organization to personal because free organization repos are no longer free.
 
 > Note on overriding numeric values like ports via env vars: due to a limitation in the lua templating engine in openresty, they must be quoted twice: KONG_X_VAR="'1234'".
 
