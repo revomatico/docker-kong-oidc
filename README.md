@@ -78,7 +78,7 @@
   - See: <https://github.com/nokia/kong-oidc/issues/1>
 - To enable the plugins, set the env variable for the container with comma separated plugin values:
   - `KONG_PLUGINS=bundled,oidc`
-- A common default session_secret should be defined by setting env KONG_X_SESSION_SECRET
+- A common default session_secret must be defined by setting env `KONG_X_SESSION_SECRET` to a base64 encoded string
 - `KONG_X_SESSION_NAME=oidc_session`
 
 ## Releases
