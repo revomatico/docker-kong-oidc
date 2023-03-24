@@ -38,7 +38,7 @@ RUN set -ex \
     && TPL=${LUA_BASE_DIR}/kong/templates/nginx_kong.lua \
     # May cause side effects when using another nginx under this kong, unless set to the same value
     && sed -i "/server_name kong;/a\ \n\
-set_decode_base64 \$session_secret \${{X_SESSION_SECRET}};\n" "$TPL" \
+set_decode_base64 \$session_secret '\${{X_SESSION_SECRET}}';\n" "$TPL" \
     # Patch nginx_kong.lua to set dictionaries
     && sed -i -E '/^lua_shared_dict kong\s+.+$/i\ \n\
 variables_hash_max_size 2048;\n\

@@ -110,6 +110,8 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
+- 2023-03-24 [3.2.2-2]
+  - Qote X_SESSION_SECRET in an attempt to prevent 500 internal error when it is not set
 - 2023-03-21 [3.2.2-1]
   - Bump kong to 3.2.2. Went back to the official kong image.
 - 2023-03-08 [3.2.1-2]
