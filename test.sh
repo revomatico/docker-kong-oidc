@@ -23,15 +23,20 @@ else
 fi
 { set +x; } 2>/dev/null
 
-RESP=$(set -x; curl -sS localhost:$KONG_LOCAL_HTTP_PORT/request.php)
+RESP=$(set -x; curl -sSv localhost:$KONG_LOCAL_HTTP_PORT/request.php 2>&1)
 RET=$?
+
 ## Cleanup
-if [[ $RET -eq 0 ]]; then
+HTTP_RESP=$(grep -oP '(?<=HTTP\/1.1 )[0-9]+' <<< \"$RESP\")
+if [[ "$HTTP_RESP" != "200" ]]; then
+    docker logs $DOCKER_CONTAINER
+    echo "-----------------------------------------------------------------------------------------"
+    echo "$RESP"
+    echo "-----------------------------------------------------------------------------------------"
+    echo "!!!!!FAILED with ret code $RET / http code $HTTP_RESP!!!!!"
+    exit $RET
+else
     echo "$RESP" | grep -oP '(?<=<li>)[^<]+'
     echo ""
     echo "Success!!!"
-else
-    echo "!!!!!FAILED with code $RET!!!!!"
-    docker logs $DOCKER_CONTAINER
-    exit $RET
 fi

@@ -6,9 +6,9 @@ LABEL authors="Cristian Chiru <cristian.chiru@revomatico.com>"
 
 ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
-    KONG_PLUGIN_OIDC_VER="1.3.0-3" \
+    KONG_PLUGIN_OIDC_VER="1.3.1-1" \
     KONG_PLUGIN_COOKIES_TO_HEADERS_VER="1.2.0-1" \
-    LUA_RESTY_OIDC_VER="1.7.5-1" \
+    LUA_RESTY_OIDC_VER="1.7.6-3" \
     NGX_DISTRIBUTED_SHM_VER="1.0.7"
 
 RUN set -ex \
@@ -37,8 +37,9 @@ RUN set -ex \
     # Patch nginx_kong.lua for kong-oidc session_secret
     && TPL=${LUA_BASE_DIR}/kong/templates/nginx_kong.lua \
     # May cause side effects when using another nginx under this kong, unless set to the same value
-    && sed -i "/server_name kong;/a\ \n\
-set_decode_base64 \$session_secret '\${{X_SESSION_SECRET}}';\n" "$TPL" \
+    && sed -i '/server_name kong;/a\ \n\
+    set_decode_base64 \$session_secret "\${{X_SESSION_SECRET}}";\n\
+    ' "$TPL" \
     # Patch nginx_kong.lua to set dictionaries
     && sed -i -E '/^lua_shared_dict kong\s+.+$/i\ \n\
 variables_hash_max_size 2048;\n\

@@ -7,7 +7,7 @@ set -x
 docker run -d -it \
     --name $DOCKER_CONTAINER \
     --hostname $DOCKER_CONTAINER \
-    -e KONG_LOG_LEVEL=info \
+    -e KONG_LOG_LEVEL=${KONG_LOG_LEVEL:-info} \
     -e KONG_ADMIN_ACCESS_LOG=/dev/stdout \
     -e KONG_ADMIN_ERROR_LOG=/dev/stderr \
     -e KONG_ADMIN_GUI_ACCESS_LOG=/dev/stdout \
@@ -27,6 +27,7 @@ docker run -d -it \
     -e KONG_PROXY_LISTEN='0.0.0.0:8000, 0.0.0.0:8443 http2 ssl' \
     -e KONG_STATUS_LISTEN='0.0.0.0:8100' \
     -e KONG_NGINX_DAEMON='off' \
+    -e KONG_X_SESSION_SECRET='eW91Z290bWVoYWNrZXIh' \
     -e KONG_X_SESSION_MEMCACHE_PORT="'1234'" \
     -e KONG_X_SESSION_COMPRESSOR=zlib \
     -v $PWD/test:/kong_dbless \

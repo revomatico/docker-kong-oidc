@@ -78,7 +78,7 @@
   - See: <https://github.com/nokia/kong-oidc/issues/1>
 - To enable the plugins, set the env variable for the container with comma separated plugin values:
   - `KONG_PLUGINS=bundled,oidc`
-- A common default session_secret must be defined by setting env `KONG_X_SESSION_SECRET` to a base64 encoded string
+- A common default session_secret must be defined by setting env `KONG_X_SESSION_SECRET` to a base64 encoded string to avoid Kong 500 server error: set_decode_base64: invalid value
 - `KONG_X_SESSION_NAME=oidc_session`
 
 ## Releases
@@ -110,6 +110,8 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
+- 2023-03-26 [3.2.2-3]
+  - Bump lua-resty-oidc to 1.7.6-3 and kong-plugin-oidc to 1.3.1-1. Based on https://github.com/zmartzone/lua-resty-openidc/issues/463, will fix https://github.com/revomatico/docker-kong-oidc/issues/37
 - 2023-03-24 [3.2.2-2]
   - Qote X_SESSION_SECRET in an attempt to prevent 500 internal error when it is not set
 - 2023-03-21 [3.2.2-1]
