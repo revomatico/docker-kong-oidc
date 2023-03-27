@@ -2,7 +2,7 @@
 
 > Builds a Docker image (https://hub.docker.com/r/cristianchiru/docker-kong-oidc) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
 
-> !! Starting with [3.2.2-1](https://github.com/revomatico/docker-kong-oidc/releases/tag/3.2.2-1) Docker repository is available to from personal account because free organization repos where supposed to be removed but then Docker changed their minds on 20th of March 2023. Since I do not trust them anymore, the old repo (https://hub.docker.com/r/cristianchiru/docker-kong-oidc) is still there, but I consider it deprecated.
+> !! Starting with [3.2.2-1](https://github.com/revomatico/docker-kong-oidc/releases/tag/3.2.2-1) Docker repository is available from personal account too because free organization repos where supposed to be removed but then Docker changed their minds on 20th of March 2023. Since I do not trust them anymore, the old repo (https://hub.docker.com/r/cristianchiru/docker-kong-oidc) is still there, but I consider it deprecated.
 
 ## Notes
 
