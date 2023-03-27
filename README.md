@@ -7,7 +7,7 @@
 ## Notes
 
 - Overriding numeric values like ports via env vars: due to a limitation in the lua templating engine in openresty, they must be quoted twice: KONG_X_VAR="'1234'".
-- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'some_base64_string';`
+- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret "$KONG_X_SESSION_SECRET";`
   - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
   - See: <https://github.com/nokia/kong-oidc/issues/1>
 - A common default session_secret must be defined by setting env `KONG_X_SESSION_SECRET` to a base64 encoded string to avoid Kong 500 server error: set_decode_base64: invalid value
