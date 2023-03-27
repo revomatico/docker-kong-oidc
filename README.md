@@ -1,10 +1,20 @@
 # docker-kong-oidc
 
-> Builds a [Docker image](https://hub.docker.com/r/cristianchiru/docker-kong-oidc) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
+> Builds a Docker image (https://hub.docker.com/r/cristianchiru/docker-kong-oidc) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
 
-> !! Starting with [3.2.2-1](https://github.com/revomatico/docker-kong-oidc/releases/tag/3.2.2-1) Docker repository moved from organization to personal because free organization repos are no longer free.
+> !! Starting with [3.2.2-1](https://github.com/revomatico/docker-kong-oidc/releases/tag/3.2.2-1) Docker repository is available to from personal account because free organization repos where supposed to be removed but then Docker changed their minds on 20th of March 2023. Since I do not trust them anymore, the old repo (https://hub.docker.com/r/cristianchiru/docker-kong-oidc) is still there, but I consider it deprecated.
 
-> Note on overriding numeric values like ports via env vars: due to a limitation in the lua templating engine in openresty, they must be quoted twice: KONG_X_VAR="'1234'".
+## Notes
+
+- Overriding numeric values like ports via env vars: due to a limitation in the lua templating engine in openresty, they must be quoted twice: KONG_X_VAR="'1234'".
+- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'some_base64_string';`
+  - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
+  - See: <https://github.com/nokia/kong-oidc/issues/1>
+- A common default session_secret must be defined by setting env `KONG_X_SESSION_SECRET` to a base64 encoded string to avoid Kong 500 server error: set_decode_base64: invalid value
+- To enable the plugins, set the env variable for the container with comma separated plugin values:
+  - `KONG_PLUGINS=bundled,oidc`
+- Default: `KONG_X_SESSION_NAME=oidc_session`
+
 
 ## Session: Cookie
 
@@ -70,16 +80,6 @@
 - KONG_X_SESSION_SHM_LOCK_STEP, default: 0.001
 - KONG_X_SESSION_SHM_LOCK_RATIO, default: 2
 - KONG_X_SESSION_SHM_LOCK_MAX_STEP, default: 0.5
-
-## Notes
-
-- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret 'some_base64_string';`
-  - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
-  - See: <https://github.com/nokia/kong-oidc/issues/1>
-- To enable the plugins, set the env variable for the container with comma separated plugin values:
-  - `KONG_PLUGINS=bundled,oidc`
-- A common default session_secret must be defined by setting env `KONG_X_SESSION_SECRET` to a base64 encoded string to avoid Kong 500 server error: set_decode_base64: invalid value
-- `KONG_X_SESSION_NAME=oidc_session`
 
 ## Releases
 

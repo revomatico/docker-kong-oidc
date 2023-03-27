@@ -19,7 +19,7 @@ DH_REPO="$DH_USERNAME/${DOCKER_IMAGE##*/}"
 
 ## Push image to Docker Hub
 docker login -u $DH_USERNAME --password-stdin <<< "$DH_PASSWORD"
-for tag in "$DH_REPO" "${DH_REPO%:*}:latest"; do
+for tag in "$DH_REPO" "${DH_REPO%:*}:latest" "revomatico/${DOCKER_IMAGE##*/}"; do
     docker tag $DOCKER_IMAGE "$tag"
     docker push "$tag"
 done
