@@ -7,10 +7,10 @@
 ## Notes
 
 - Overriding numeric values like ports via env vars: due to a limitation in the lua templating engine in openresty, they must be quoted twice: `KONG_X_VAR="'1234'"`.
-- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set_decode_base64 $session_secret "$KONG_X_SESSION_SECRET";`
+- Dockerfile will patch `nginx_kong.lua` template at build time, to include `set $session_secret "$KONG_X_SESSION_SECRET";`
   - This is needed for the kong-oidc plugin to set a session secret that will later override the template string
   - See: <https://github.com/nokia/kong-oidc/issues/1>
-- A common default session_secret must be defined by setting env `KONG_X_SESSION_SECRET` to a base64 encoded string to avoid Kong 500 server error: set_decode_base64: invalid value
+- A common default session_secret must be defined by setting env `KONG_X_SESSION_SECRET` to a string
 - To enable the plugins, set the env variable for the container with comma separated plugin values:
   - `KONG_PLUGINS=bundled,oidc`
 - Default: `KONG_X_SESSION_NAME=oidc_session`
@@ -89,7 +89,8 @@
 
 ## Releases
 
-- Kong v3.2.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.3.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.2.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.2.2-4/Dockerfile)
 - Kong v3.2.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.2.1-2/Dockerfile)
 - Kong v3.1.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.1.1-1/Dockerfile)
 - Kong v3.1.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.1.0-1/Dockerfile)
@@ -116,6 +117,8 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
+- 2023-06-13 [3.3.0-1]
+  - Bump kong to 3.3.0
 - 2023-03-26 [3.2.2-4]
   - Introduce `KONG_X_NOLOG_LIST_FILE` that could optionally point to a file containing list of IPs to be excluded from access_log
 - 2023-03-26 [3.2.2-3]
