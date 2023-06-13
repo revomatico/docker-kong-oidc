@@ -49,47 +49,54 @@ lua_shared_dict introspection \${{X_OIDC_CACHE_INTROSPECTION_SIZE}};\n\
 > if x_session_storage == "shm" then\n\
 lua_shared_dict \${{X_SESSION_SHM_STORE}} \${{X_SESSION_SHM_STORE_SIZE}};\n\
 > end\n\
-    ' "$TPL" \
+map \$remote_addr \$log_ip {\n\
+> if x_nolog_list_file then\n\
+    include \${{X_NOLOG_LIST_FILE}};\n\
+> end\n\
+    default 1;\n\
+}\n\
+' "$TPL" \
     # Patch nginx_kong.lua to add for memcached sessions
     && sed -i "/server_name kong;/a\ \n\
 ## Session:
-set \$session_storage \${{X_SESSION_STORAGE}};\n\
-set \$session_name \${{X_SESSION_NAME}};\n\
-set \$session_compressor \${{X_SESSION_COMPRESSOR}};\n\
+    set \$session_storage \${{X_SESSION_STORAGE}};\n\
+    set \$session_name \${{X_SESSION_NAME}};\n\
+    set \$session_compressor \${{X_SESSION_COMPRESSOR}};\n\
 ## Session: Memcached specific
-set \$session_memcache_connect_timeout \${{X_SESSION_MEMCACHE_CONNECT_TIMEOUT}};\n\
-set \$session_memcache_send_timeout \${{X_SESSION_MEMCACHE_SEND_TIMEOUT}};\n\
-set \$session_memcache_read_timeout \${{X_SESSION_MEMCACHE_READ_TIMEOUT}};\n\
-set \$session_memcache_prefix \${{X_SESSION_MEMCACHE_PREFIX}};\n\
-set \$session_memcache_host \${{X_SESSION_MEMCACHE_HOST}};\n\
-set \$session_memcache_port \${{X_SESSION_MEMCACHE_PORT}};\n\
-set \$session_memcache_uselocking \${{X_SESSION_MEMCACHE_USELOCKING}};\n\
-set \$session_memcache_spinlockwait \${{X_SESSION_MEMCACHE_SPINLOCKWAIT}};\n\
-set \$session_memcache_maxlockwait \${{X_SESSION_MEMCACHE_MAXLOCKWAIT}};\n\
-set \$session_memcache_pool_timeout \${{X_SESSION_MEMCACHE_POOL_TIMEOUT}};\n\
-set \$session_memcache_pool_size \${{X_SESSION_MEMCACHE_POOL_SIZE}};\n\
+    set \$session_memcache_connect_timeout \${{X_SESSION_MEMCACHE_CONNECT_TIMEOUT}};\n\
+    set \$session_memcache_send_timeout \${{X_SESSION_MEMCACHE_SEND_TIMEOUT}};\n\
+    set \$session_memcache_read_timeout \${{X_SESSION_MEMCACHE_READ_TIMEOUT}};\n\
+    set \$session_memcache_prefix \${{X_SESSION_MEMCACHE_PREFIX}};\n\
+    set \$session_memcache_host \${{X_SESSION_MEMCACHE_HOST}};\n\
+    set \$session_memcache_port \${{X_SESSION_MEMCACHE_PORT}};\n\
+    set \$session_memcache_uselocking \${{X_SESSION_MEMCACHE_USELOCKING}};\n\
+    set \$session_memcache_spinlockwait \${{X_SESSION_MEMCACHE_SPINLOCKWAIT}};\n\
+    set \$session_memcache_maxlockwait \${{X_SESSION_MEMCACHE_MAXLOCKWAIT}};\n\
+    set \$session_memcache_pool_timeout \${{X_SESSION_MEMCACHE_POOL_TIMEOUT}};\n\
+    set \$session_memcache_pool_size \${{X_SESSION_MEMCACHE_POOL_SIZE}};\n\
 ## Session: DHSM specific
-set \$session_dshm_region \${{X_SESSION_DSHM_REGION}};\n\
-set \$session_dshm_connect_timeout \${{X_SESSION_DSHM_CONNECT_TIMEOUT}};\n\
-set \$session_dshm_send_timeout \${{X_SESSION_DSHM_SEND_TIMEOUT}};\n\
-set \$session_dshm_read_timeout \${{X_SESSION_DSHM_READ_TIMEOUT}};\n\
-set \$session_dshm_host \${{X_SESSION_DSHM_HOST}};\n\
-set \$session_dshm_port \${{X_SESSION_DSHM_PORT}};\n\
-set \$session_dshm_pool_name \${{X_SESSION_DSHM_POOL_NAME}};\n\
-set \$session_dshm_pool_timeout \${{X_SESSION_DSHM_POOL_TIMEOUT}};\n\
-set \$session_dshm_pool_size \${{X_SESSION_DSHM_POOL_SIZE}};\n\
-set \$session_dshm_pool_backlog \${{X_SESSION_DSHM_POOL_BACKLOG}};\n\
+    set \$session_dshm_region \${{X_SESSION_DSHM_REGION}};\n\
+    set \$session_dshm_connect_timeout \${{X_SESSION_DSHM_CONNECT_TIMEOUT}};\n\
+    set \$session_dshm_send_timeout \${{X_SESSION_DSHM_SEND_TIMEOUT}};\n\
+    set \$session_dshm_read_timeout \${{X_SESSION_DSHM_READ_TIMEOUT}};\n\
+    set \$session_dshm_host \${{X_SESSION_DSHM_HOST}};\n\
+    set \$session_dshm_port \${{X_SESSION_DSHM_PORT}};\n\
+    set \$session_dshm_pool_name \${{X_SESSION_DSHM_POOL_NAME}};\n\
+    set \$session_dshm_pool_timeout \${{X_SESSION_DSHM_POOL_TIMEOUT}};\n\
+    set \$session_dshm_pool_size \${{X_SESSION_DSHM_POOL_SIZE}};\n\
+    set \$session_dshm_pool_backlog \${{X_SESSION_DSHM_POOL_BACKLOG}};\n\
 ## Session: SHM Specific
-set \$session_shm_store \${{X_SESSION_SHM_STORE}};\n\
-set \$session_shm_uselocking \${{X_SESSION_SHM_USELOCKING}};\n\
-set \$session_shm_lock_exptime \${{X_SESSION_SHM_LOCK_EXPTIME}};\n\
-set \$session_shm_lock_timeout \${{X_SESSION_SHM_LOCK_TIMEOUT}};\n\
-set \$session_shm_lock_step \${{X_SESSION_SHM_LOCK_STEP}};\n\
-set \$session_shm_lock_ratio \${{X_SESSION_SHM_LOCK_RATIO}};\n\
-set \$session_shm_lock_max_step \${{X_SESSION_SHM_LOCK_MAX_STEP}};\n\
+    set \$session_shm_store \${{X_SESSION_SHM_STORE}};\n\
+    set \$session_shm_uselocking \${{X_SESSION_SHM_USELOCKING}};\n\
+    set \$session_shm_lock_exptime \${{X_SESSION_SHM_LOCK_EXPTIME}};\n\
+    set \$session_shm_lock_timeout \${{X_SESSION_SHM_LOCK_TIMEOUT}};\n\
+    set \$session_shm_lock_step \${{X_SESSION_SHM_LOCK_STEP}};\n\
+    set \$session_shm_lock_ratio \${{X_SESSION_SHM_LOCK_RATIO}};\n\
+    set \$session_shm_lock_max_step \${{X_SESSION_SHM_LOCK_MAX_STEP}};\n\
 " "$TPL" \
     # Patch kong_defaults.lua to add custom variables that are replaced dynamically in the template above when kong is started
     && TPL=${LUA_BASE_DIR}/kong/templates/kong_defaults.lua \
+    && sed -E -i "s/((admin|proxy)_access_log.+)/\1 combined if=\$log_ip/" "$TPL" \
     && sed -i "/\]\]/i\ \n\
 x_session_storage = cookie\n\
 x_session_name = oidc_session\n\
@@ -131,6 +138,8 @@ x_session_shm_lock_max_step = '0.5'\n\
 x_oidc_cache_discovery_size = 128k\n\
 x_oidc_cache_jwks_size = 128k\n\
 x_oidc_cache_introspection_size = 128k\n\
+\n\
+x_nolog_list_file =\n\
 \n\
 " "$TPL" \
     ## Cleanup
