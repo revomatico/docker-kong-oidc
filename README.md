@@ -1,8 +1,8 @@
 # docker-kong-oidc
 
-> Builds a Docker image (https://hub.docker.com/r/cristianchiru/docker-kong-oidc) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
+> Builds a Docker image (<https://hub.docker.com/r/cristianchiru/docker-kong-oidc>) from base Kong + [revomatico/kong-oidc](https://github.com/revomatico/kong-oidc) plugin (based on zmartzone/lua-resty-openidc)
 
-> !! Starting with [3.2.2-1](https://github.com/revomatico/docker-kong-oidc/releases/tag/3.2.2-1) Docker repository is available from personal account too because free organization repos where supposed to be removed but then Docker changed their minds on 20th of March 2023. Since I do not trust them anymore, the old repo (https://hub.docker.com/r/revomatico/docker-kong-oidc) is still there, but I consider it deprecated.
+> !! Starting with [3.2.2-1](https://github.com/revomatico/docker-kong-oidc/releases/tag/3.2.2-1) Docker repository is available from personal account too because free organization repos where supposed to be removed but then Docker changed their minds on 20th of March 2023. Since I do not trust them anymore, the old repo (<https://hub.docker.com/r/revomatico/docker-kong-oidc>) is still there, but I consider it deprecated.
 
 ## Notes
 
@@ -81,15 +81,18 @@
 - KONG_X_SESSION_SHM_LOCK_MAX_STEP, default: 0.5
 
 ## Exclude IPs from access_log
+
 - `KONG_X_NOLOG_LIST_FILE` could be set to a file path, e.g. `/tmp/nolog.txt`
 - File format is `ip 0;`. To exclude for example requests from the kubernetes probes:
+
     ```
     127.0.0.1 0;
     ```
 
 ## Releases
 
-- Kong v3.3.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.3.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/master/Dockerfile)
+- Kong v3.3.0: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.3.0-1/Dockerfile)
 - Kong v3.2.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.2.2-4/Dockerfile)
 - Kong v3.2.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.2.1-2/Dockerfile)
 - Kong v3.1.1: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/3.1.1-1/Dockerfile)
@@ -117,12 +120,15 @@
 - Kong v2.0.2: [Dockerfile](https://github.com/revomatico/docker-kong-oidc/blob/2.0.2-1/Dockerfile)
 
 ## Release notes
+
+- 2023-08-09 [3.3.1-1]
+  - Bump kong to 3.3.1
 - 2023-06-13 [3.3.0-1]
   - Bump kong to 3.3.0
 - 2023-03-26 [3.2.2-4]
   - Introduce `KONG_X_NOLOG_LIST_FILE` that could optionally point to a file containing list of IPs to be excluded from access_log
 - 2023-03-26 [3.2.2-3]
-  - Bump lua-resty-oidc to 1.7.6-3 and kong-plugin-oidc to 1.3.1-1. Based on https://github.com/zmartzone/lua-resty-openidc/issues/463, will fix https://github.com/revomatico/docker-kong-oidc/issues/37
+  - Bump lua-resty-oidc to 1.7.6-3 and kong-plugin-oidc to 1.3.1-1. Based on <https://github.com/zmartzone/lua-resty-openidc/issues/463>, will fix <https://github.com/revomatico/docker-kong-oidc/issues/37>
 - 2023-03-24 [3.2.2-2]
   - Qote X_SESSION_SECRET in an attempt to prevent 500 internal error when it is not set
 - 2023-03-21 [3.2.2-1]
