@@ -1,27 +1,23 @@
-FROM kong/kong:3.3.1-alpine
+FROM kong/kong:3.4.0
 
 USER root
 
 LABEL authors="Cristian Chiru <cristian.chiru@revomatico.com>"
 
-ENV PACKAGES="openssl-devel kernel-headers gcc git openssh" \
+ENV DEV_PACKAGES="libssl-dev make gcc git curl unzip" \
     LUA_BASE_DIR="/usr/local/share/lua/5.1" \
     KONG_PLUGIN_OIDC_VER="1.3.1-1" \
     KONG_PLUGIN_COOKIES_TO_HEADERS_VER="1.2.0-1" \
     LUA_RESTY_OIDC_VER="1.7.6-3" \
-    NGX_DISTRIBUTED_SHM_VER="1.0.7"
+    NGX_DISTRIBUTED_SHM_VER="1.0.8"
 
 RUN set -ex \
-    && apk --no-cache add libssl1.1 openssl curl unzip git \
-    && apk --no-cache add --virtual .build-dependencies \
-    make \
-    gcc \
-    openssl-dev \
-    \
+    && apt-get update \
+    && apt-get install --no-install-recommends --no-install-suggests -y $DEV_PACKAGES \
     ## Install plugins
     # Download ngx-distributed-shm dshm library
     && curl -sL https://raw.githubusercontent.com/grrolland/ngx-distributed-shm/${NGX_DISTRIBUTED_SHM_VER}/lua/dshm.lua > ${LUA_BASE_DIR}/resty/dshm.lua \
-    # Remove old lua-resty-session
+    # Remove current lua-resty-session
     && luarocks remove --force lua-resty-session \
     # Add Pluggable Compressors dependencies
     && luarocks install lua-ffi-zlib \
@@ -144,7 +140,11 @@ x_nolog_list_file =\n\
 " "$TPL" \
     ## Cleanup
     && rm -fr *.rock* \
-    && apk del .build-dependencies 2>/dev/null \
+    # && rm -f /usr/local/openresty/nginx/modules/ngx_wasm_module.so \
+    && apt-get purge -y $DEV_PACKAGES \
+    && apt-get autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt \
     ## Create kong and working directory (https://github.com/Kong/kong/issues/2690)
     && mkdir -p /usr/local/kong \
     && chown -R kong:`id -gn kong` /usr/local/kong
