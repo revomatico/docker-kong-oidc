@@ -1,10 +1,10 @@
 #!/bin/bash
 
-cd `readlink -f $0 | grep -o '.*/'`
+cd $(readlink -f $0 | grep -o '.*/')
 . common.sh
 
 set -x
-docker run -d -it \
+docker run -d -t \
     --name $DOCKER_CONTAINER \
     --hostname $DOCKER_CONTAINER \
     -e KONG_LOG_LEVEL=${KONG_LOG_LEVEL:-info} \

@@ -122,6 +122,8 @@
 
 ## Release notes
 
+- 2023-09-04 [3.4.0-2]
+  - Bump kong-oidc plugin to [1.4.0-1](https://github.com/revomatico/kong-oidc/releases/tag/v1.4.0-1)
 - 2023-08-14 [3.4.0-1]
   - Bump kong to 3.4.0
 - 2023-08-09 [3.3.1-1]
